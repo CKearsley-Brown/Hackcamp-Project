@@ -34,28 +34,7 @@
 
         </ul>
             <?php
-
-            if (!isset($_SESSION["login"])) {
-                echo ' 
-            <form method="post" action="" class="form text-primary">
-                <div class="form-group">
-                    <label for="userID">UserID</label>
-                    <input type="text" class="form-control" placeholder="UserID" name="userID" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" placeholder="password" name="password" required>
-                </div>
-                <input type="submit" class="btn btn-primary" name="loginbutton" value="Login">
-            </form>';
-                if (isset($_SESSION["error"]))
-                {
-                    echo "<p class='error'>" . $_SESSION["error"] . "</p>";
-                    unset($_SESSION["error"]);
-                }
-            }
-            else
-            {
+            if (isset($_SESSION["login"])) {
             echo '
             <form method="post" action="" class="form text-primary">
                 <label>Logged in as ' . $_SESSION["login"] . '</label>
@@ -64,12 +43,11 @@
             }
             ?>
 
-            <li><a href="index.php">Index</a></li>
-            <li><a href="#">Page 2</a></li>
-            <li><a href="#">Page 3</a></li>
+            <li><a href="index.php">Login</a></li>
+            <li><a href="register.php">Register</a></li>
+            <li><a href="#">Edit Profile</a></li>
+            <li><a href="#">Matching</a></li>
+            <li><a href="#">Applied Students (Only Visible for Logged in Staff Accounts)</a></li>
         </ul>
         </div>
     <div id="content" class="col-xs-6 col-sm-9 col-md-10">
-
-
-
