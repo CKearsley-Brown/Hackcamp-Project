@@ -1,6 +1,6 @@
 <?php
 
-class UserData {
+class EmployerData {
     
     protected $_userID, $_firstName, $_lastName, $_username, $_email, $_password, $_photo ;
     

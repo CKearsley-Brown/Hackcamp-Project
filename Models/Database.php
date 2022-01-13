@@ -1,51 +1,58 @@
 <?php
 
-class UserData {
+class Database {
+    /**
+     * @var Database
+     */
+    protected static $_dbInstance = null;
 
-    protected $_userID, $_firstName, $_lastName, $_username, $_email, $_password, $_photo ;
+    /**
+     * @var PDO
+     */
+    protected $_dbHandle;
 
-    public function __construct($dbRow) {
-        $this->_userID = $dbRow['id'];
-        $this->_username = $dbRow['username'];
-        $this->_email = $dbRow['email'];
-        $this->_password = $dbRow['password'];
-        $this->_firstName = $dbRow['first_name'];
-        $this->_lastName = $dbRow['last_name'];
-        $this->_photo = $dbRow['photo'];
-        //add lat and long here in trimester 2
-    }
-    public function getUserID() {
-        return $this->_userID; //getter method
-    }
+    /**
+     * @return Database
+     */
+    public static function getInstance() {
+        $username ='hc22-18';
+        $password = '9DMsGr9pi16QdjZ';
+        $host = 'poseidon.salford.ac.uk';
+        $dbName = 'hc22-18';
 
-    public function getFirstName() {
-        return $this->_firstName; //getter method
-    }
+        if(self::$_dbInstance === null) { //checks if the PDO exists
+            // creates new instance if not, sending in connection info
+            self::$_dbInstance = new self($username, $password, $host, $dbName);
+        }
 
-    public function getLastName() {
-        return $this->_lastName; //getter method
-    }
-
-    public function getEmail() {
-        return $this->_email; //getter method
+        return self::$_dbInstance;
     }
 
-    public function getPassword() {
-        return $this->_password; //getter method
+    /**
+     * @param $username
+     * @param $password
+     * @param $host
+     * @param $database
+     */
+    private function __construct($username, $password, $host, $database) {
+        try {
+            $this->_dbHandle = new PDO("mysql:host=$host;dbname=$database",  $username, $password); // creates the database handle with connection info
+            //$this->_dbHandle = new PDO('mysql:host=' . $host . ';dbname=' . $database,  $username, $password); // creates the database handle with connection info
+
+        }
+        catch (PDOException $e) { // catch any failure to connect to the database
+            echo $e->getMessage();
+        }
     }
 
-    public function getUsername() {
-        return $this->_username; //getter method
+    /**
+     * @return PDO
+     */
+    public function getdbConnection() {
+        return $this->_dbHandle; // returns the PDO handle to be used                                        elsewhere
     }
-    public function getPhoto() {
-        return $this->_photo; //getter method
+
+    public function __destruct() {
+        $this->_dbHandle = null; // destroys the PDO handle when nolonger needed                                        longer needed
     }
-
-
-
-
-
-
 }
-
-
