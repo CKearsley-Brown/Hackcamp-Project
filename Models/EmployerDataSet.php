@@ -34,7 +34,7 @@ class EmployerDataSet
 
     public function checkUniqueCName($CName)
     {
-        //checks username is unique when registering for an account
+        //checks company name is unique when registering for an account
         $sqlPKeyCheck = "SELECT * From Employer WHERE company_name = ?"; // checks that the primary key is unique
         $checkStatement = $this->_dbHandle->prepare($sqlPKeyCheck); // prepare a PDO statement
 
