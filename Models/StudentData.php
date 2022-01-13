@@ -13,7 +13,6 @@ class StudentData
         $this->_password = $dbRow['password'];
         $this->_cv = $dbRow['cv'];
         $this->_phone = $dbRow['phone'];
-        //add lat and long here in trimester 2
     }
 
     public function getStudentID()
