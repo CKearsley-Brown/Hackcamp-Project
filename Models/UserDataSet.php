@@ -79,6 +79,30 @@ class UserDataSet
         return $pass;
 
     }
+
+    public function insertNewEmployer($_ID, $_imagePath,$_companyName) {
+        $sqlQuery = "INSERT INTO Employer (id_employer, image, company_name) VALUES (?,?,?)"; //prepare SQL to query the database
+        $statement = $this->_dbHandle->prepare($sqlQuery); //prepare PDO Statement
+
+
+        $statement->bindparam(1, $_ID); //binds parameter values to variables within the function
+        $statement->bindparam(2, $_imagePath); //doing this helps remove sql injection
+        $statement->bindparam(3, $_companyName);
+
+        return $statement->execute(); // execute the PDO statement
+    }
+
+    public function insertNewStudent($_ID, $_cv) {
+        $sqlQuery = "INSERT INTO Student (id_student, cv) VALUES (?,?)"; //prepare SQL to query the database
+        $statement = $this->_dbHandle->prepare($sqlQuery); //prepare PDO Statement
+
+
+        $statement->bindparam(1, $_ID); //binds parameter values to variables within the function
+        $statement->bindparam(2, $_cv); //doing this helps remove sql injection
+
+
+        return $statement->execute(); // execute the PDO statement
+    }
 }
 
 
