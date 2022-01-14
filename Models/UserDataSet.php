@@ -54,9 +54,10 @@ class UserDataSet
 
         $row = $statement->fetch();
         $dataSet = new UserData($row);
+
         if (password_verify($_password, $dataSet->getPassword())) //checks passwords match
         {
-            return $dataSet;
+            return true;
         }
         else return false;
     }
