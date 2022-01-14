@@ -44,7 +44,7 @@ class UserDataSet
     }
 
     public function checkUserCredentials($_email, $_password) {
-        $sqlQuery = "SELECT * FROM users WHERE email=? AND password=?"; //prepare SQL to query the database
+        $sqlQuery = "SELECT * FROM users WHERE email=?"; //prepare SQL to query the database
 
         $statement = $this->_dbHandle->prepare($sqlQuery); //prepare PDO Statement
 
@@ -52,11 +52,13 @@ class UserDataSet
         $statement->bindParam(2,$_password);
         $statement->execute(); // execute the PDO statement
 
-        $dataSet = []; //create dataset to store query data
-        while ($row = $statement->fetch()) {
-            $dataSet[] = new UserData($row);
+        $row = $statement->fetch();
+        $dataSet = new UserData($row);
+        if (password_verify($_password, $dataSet->getPassword())) //checks passwords match
+        {
+            return $dataSet;
         }
-        return $dataSet;
+        else return false;
     }
 
     public function checkUniqueCName($CName)

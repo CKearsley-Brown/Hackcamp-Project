@@ -45,12 +45,10 @@ class User {
             $this->logged_in_status = true;
             $this->name = $_name;
             $this->userID = $usersDataSet[0]->getUserID();
-            //echo "logged in";
             return true;
         }
         else
         {
-            //echo "not logged in";
             $this->logged_in_status = false;
             return false;
         }
