@@ -106,6 +106,21 @@ class UserDataSet
         return $statement->execute(); // execute the PDO statement
     }
 
+
+    public function checkUniqueEmail($email) {
+        $fetchUser = "SELECT * From Users WHERE email = ?"; // fetches a user with a given email
+        $checkStatement = $this->_dbHandle->prepare($fetchUser); // prepare a PDO statement
+
+        $checkStatement->bindParam(1,$email);
+
+        $checkStatement->execute(); // execute the PDO statement
+        var_dump($checkStatement->fetch());
+        return is_null($checkStatement->fetch());
+
+
+    }
+
+
     public function fetchUserID($email) {
         $fetchUser = "SELECT * From Users WHERE email = ?"; // fetches a user with a given email
         $checkStatement = $this->_dbHandle->prepare($fetchUser); // prepare a PDO statement
@@ -120,4 +135,6 @@ class UserDataSet
         return $user->getUserID();
 
     }
+
+
 }
