@@ -41,10 +41,10 @@ class User {
         //check credentials then takes the users username and password and checks if they exist in the database
         if ($check == false){
             $_SESSION["login"] = $_email; //sets the $_SESSION constant of "login" to the username
-            $_SESSION["user_id"] = $usersDataSet[0]->getUserID(); //sets the $_SESSION constant of "user_id" to the users ID
+            $_SESSION["user_id"] = $users->fetchUserID($_email); //sets the $_SESSION constant of "user_id" to the users ID
             $this->logged_in_status = true;
             $this->email = $_email;
-            $this->userID = $usersDataSet[0]->getUserID();
+            $this->userID = $users->fetchUserID($_email);
             return true;
         }
         else
