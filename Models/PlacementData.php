@@ -13,7 +13,7 @@ class PlacementData {
         $this->_end = $dbRow['end'];
         $this->_employerID = $dbRow['employer_id'];
         $this->_location = $dbRow['location'];
-
+        //add lat and long here in trimester 2
     }
     public function getPlacementID() {
         return $this->_placementID; //getter method
