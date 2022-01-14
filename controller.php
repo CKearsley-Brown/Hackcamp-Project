@@ -5,9 +5,9 @@ session_start();
 if (isset($_POST["loginbutton"])) {
 
     if (false) {
-        $_SESSION["error"] = "userID or Password is incorrect.";
-    } else {
         $_SESSION["login"] = $_POST["userID"];
+    } else {
+        $_SESSION["error"] = "userID or Password is incorrect.";
     }
 }
 
