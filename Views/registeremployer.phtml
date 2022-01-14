@@ -1,0 +1,38 @@
+<?php require('template/header.phtml') ?>
+
+<h2>Employer</h2>
+<form method="post" action="" class="form text-primary">
+    <div class="form-group">
+        <label for="employerEmail">Email *</label>
+        <input type="email" class="form-control" placeholder="Email" name="employerEmail" required>
+    </div>
+    <div class="form-group">
+        <label for="employerPassword">Password *</label>
+        <input type="password" class="form-control" placeholder="Password" name="employerPassword" required>
+    </div>
+    <div class="form-group">
+        <label for="employerCompanyName">Company Name *</label>
+        <input type="text" class="form-control" placeholder="Name" name="employerCompanyName" required>
+    </div>
+    <div class="form-group">
+        <label for="employerPhoneNumber">Phone Number *</label>
+        <input type="text" class="form-control" placeholder="Phone Number" name="employerPhoneNumber" required>
+    </div>
+    <div class="form-group">
+        <label for="employerPostalAddress">Postal Address *</label>
+        <input type="text" class="form-control" placeholder="Postal Address" name="employerPostalAddress" required>
+    </div>
+    <div class="form-group">
+        <label for="employerImage">Image Upload *</label>
+    </div>
+    <input type="submit" class="btn btn-secondary" name="registerbutton" value="Register">
+</form>
+<?php
+if (isset($_SESSION["registerError"]))
+{
+echo "<p class='error'>" . $_SESSION["registerError"] . "</p>";
+unset($_SESSION["registerError"]);
+}
+?>
+
+<?php require('template/footer.phtml') ?>
