@@ -104,6 +104,21 @@ class UserDataSet
 
         return $statement->execute(); // execute the PDO statement
     }
+
+    public function fetchUserID($email) {
+        $fetchUser = "SELECT * From Users WHERE email = ?"; // fetches a user with a given email
+        $checkStatement = $this->_dbHandle->prepare($fetchUser); // prepare a PDO statement
+
+        $checkStatement->bindParam(1,$email);
+
+        $checkStatement->execute(); // execute the PDO statement
+
+        $row = $checkStatement->fetch();
+        $user = new UserData($row);         //returns the user ID
+
+        return $user->getUserID();
+
+    }
 }
 
 
