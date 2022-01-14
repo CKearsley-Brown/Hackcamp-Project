@@ -2,7 +2,7 @@
 
 class PlacementData {
 
-    protected $_placementID, $_description, $_skillsRequired, $_salary, $_start, $_end, $_employerID, $_location ;
+    protected $_placementID, $_description, $_skillsRequired, $_salary, $_start, $_end, $_employerID, $_location, $type ;
 
     public function __construct($dbRow) {
         $this->_placementID = $dbRow['id_placement'];
@@ -13,6 +13,7 @@ class PlacementData {
         $this->_end = $dbRow['end'];
         $this->_employerID = $dbRow['employer_id'];
         $this->_location = $dbRow['location'];
+        $this->type = $dbRow['type'];
         //add lat and long here in trimester 2
     }
     public function getPlacementID() {
@@ -44,6 +45,10 @@ class PlacementData {
 
     public function getEmployerID() {
         return $this->_employerID;
+    }
+
+    public function getType() {
+        return $this->type;
     }
 
 
