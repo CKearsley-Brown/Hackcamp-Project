@@ -8,14 +8,12 @@ if (isset($_POST["loginbutton"])) {
 
     require_once('Models/UserDataSet.php');
 
-    // Collect username and password for checking with password_verify
     $userDataSet = new UserDataSet();
-    $view->userDataSet = $userDataSet->checkUserCredentials($_POST["email"], $_POST["password"]);
 
     if (!empty($view->userDataSet)) {
-        $_SESSION["login"] = $_POST["userID"];
+        $_SESSION["login"] = $_POST["email"];
     } else {
-        $_SESSION["error"] = "userID or Password is incorrect.";
+        $_SESSION["error"] = "Email or Password is incorrect.";
     }
 }
 

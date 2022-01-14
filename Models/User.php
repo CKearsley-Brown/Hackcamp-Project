@@ -35,7 +35,7 @@ class User {
         return $this->email; // Getter Method
     }
 
-    public function AuthenticateUser($_email, $_password) {
+    public function AttemptLoginUser($_email, $_password) {
         $users = new UserDataSet();
         $check = $users->checkUserCredentials($_email, $_password); // Creates a new dataset and calls the check credentials method
         //check credentials then takes the users username and password and checks if they exist in the database
