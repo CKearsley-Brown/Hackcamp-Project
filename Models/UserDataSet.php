@@ -4,6 +4,7 @@ require_once ('Models/Database.php');
 require_once ('Models/UserData.php');
 require_once ('Models/StudentData.php');
 require_once ('Models/EmployerData.php');
+require_once ('Models/RelationshipData.php');
 
 class UserDataSet
 {
