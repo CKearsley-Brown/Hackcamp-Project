@@ -115,7 +115,7 @@ class UserDataSet
 
         $checkStatement->execute(); // execute the PDO statement
         var_dump($checkStatement->fetch());
-        return is_null($checkStatement->fetch());
+        return is_null($checkStatement->fetch()); //should return true if null, else false
 
 
     }
