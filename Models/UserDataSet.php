@@ -136,5 +136,24 @@ class UserDataSet
 
     }
 
+    public function checkCredentials($email, $password) {
+        $fetchUser = "SELECT * From Users WHERE email = ?"; // fetches a user with a given email
+        $checkStatement = $this->_dbHandle->prepare($fetchUser); // prepare a PDO statement
+
+        $checkStatement->bindParam(1,$email);
+
+        $checkStatement->execute(); // execute the PDO statement
+
+        $row = $checkStatement->fetch();
+        $account = new UserData($row);
+
+
+        if (password_verify($password, $account->getPassword())) //checks passwords match
+        {
+            return true;
+        }
+        else return false;
+    }
+
 
 }
