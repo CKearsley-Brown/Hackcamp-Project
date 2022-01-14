@@ -11,7 +11,6 @@ if (isset($_POST["registerbutton"])) {
     $userDataSet = new UserDataSet();
 
     if (true) {
-        // Converting the inputs to lower case and hashing the password to ensure it is secure for storage in the database.
         $userDataSet->insertNewUser(strtolower($_POST["employerContactName"]), strtolower($_POST["employerEmail"]), strtolower($_POST["employerPhoneNumber"]), strtolower($_POST["employerPostalAddress"]), $_POST["employerPassword"]);
         $userID = $userDataSet->fetchUserID(strtolower($_POST["employerEmail"]));
         $userDataSet->insertNewEmployer($userID, "testPath", strtolower($_POST["employerCompanyName"]));
