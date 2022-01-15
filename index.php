@@ -12,7 +12,7 @@ if (isset($_POST["loginbutton"]))
 {
     //var_dump($_POST);
     // try and log a user in
-    $user->AttemptLoginUser($_POST["username"],$_POST["password"]);
+    $user->AttemptLoginUser($_POST["email"],$_POST["password"]);
     //var_dump($_SESSION["login"]);
 
 
