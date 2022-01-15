@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 
 // Logs the user out of the system
 if (isset($_POST["logoutbutton"]))

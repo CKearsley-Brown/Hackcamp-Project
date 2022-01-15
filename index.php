@@ -6,7 +6,7 @@ $view->pageTitle = 'Index';
 // Login button Pressed
 if (isset($_POST["loginbutton"])) {
 
-    require_once('Models/UserDataSet.php');
+    require_once('Models/UsersDataSet.php');
 
     // Collect username and password for checking with password_verify
     $userDataSet = new UserDataSet();
