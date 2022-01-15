@@ -39,8 +39,7 @@ class User {
         $users = new UserDataSet();
         $check = $users->checkUserCredentials($_email, $_password); // Creates a new dataset and calls the check credentials method
         //check credentials then takes the users username and password and checks if they exist in the database
-        var_dump($check);
-        if ($check == true){
+        if ($check == false){
             $_SESSION["login"] = $_email; //sets the $_SESSION constant of "login" to the username
             $_SESSION["user_id"] = $users->fetchUserID($_email); //sets the $_SESSION constant of "user_id" to the users ID
             $this->logged_in_status = true;
