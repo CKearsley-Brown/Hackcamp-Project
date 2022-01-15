@@ -44,12 +44,11 @@ class UserDataSet
     }
 
     public function checkUserCredentials($_email, $_password) {
-        $sqlQuery = "SELECT * FROM Users WHERE email=? AND password=?"; //prepare SQL to query the database
+        $sqlQuery = "SELECT * FROM Users WHERE email=?"; //prepare SQL to query the database
 
         $statement = $this->_dbHandle->prepare($sqlQuery); //prepare PDO Statement
-
+        $hashPWD = password_hash($_password, PASSWORD_DEFAULT);
         $statement->bindParam(1,$_email);
-        $statement->bindParam(2,$_password);
         $statement->execute(); // execute the PDO statement
 
         $row = $statement->fetch();
