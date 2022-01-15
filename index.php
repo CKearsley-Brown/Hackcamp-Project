@@ -3,11 +3,19 @@
 $view = new stdClass();
 $view->pageTitle = 'Index';
 
-// Login button Pressed
-if (isset($_POST["loginbutton"])) {
-    require_once('Models/UserDataSet.php');
+require_once('Models/User.php');
+$user = new User();
+$_SESSION['user'] = $user;
 
-    AttemptLoginUser($_POST["email"], $_POST["password"]);
+// Login button Pressed
+if (isset($_POST["loginbutton"]))
+{
+    //var_dump($_POST);
+    // try and log a user in
+    $user->AttemptLoginUser($_POST["username"],$_POST["password"]);
+    //var_dump($_SESSION["login"]);
+
+
 }
 
 require_once('controller.php');
