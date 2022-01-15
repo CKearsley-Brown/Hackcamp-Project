@@ -2,9 +2,10 @@
 
 $view = new stdClass();
 $view->pageTitle = 'Index';
+
+require_once('Models/Users.php');
 $user = new User();
 $_SESSION['user'] = $user;
-require_once('Models/Users.php');
 
 // Login button Pressed
 if (isset($_POST["loginbutton"])) {
