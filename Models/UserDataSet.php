@@ -47,16 +47,18 @@ class UserDataSet
         $sqlQuery = "SELECT * FROM Users WHERE email=?"; //prepare SQL to query the database
 
         $statement = $this->_dbHandle->prepare($sqlQuery); //prepare PDO Statement
-        $hashPWD = password_hash($_password, PASSWORD_DEFAULT);
         $statement->bindParam(1,$_email);
         $statement->execute(); // execute the PDO statement
 
         $row = $statement->fetch();
-        $dataSet = new UserData($row);
 
-        if (password_verify($_password, $dataSet->getPassword())) //checks passwords match
-        {
-            return true;
+        if ($row != false) {
+            $dataSet = new UserData($row);
+
+            if (password_verify($_password, $dataSet->getPassword())) //checks passwords match
+            {
+                return true;
+            } else return false;
         }
         else return false;
     }
