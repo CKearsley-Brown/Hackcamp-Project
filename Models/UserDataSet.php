@@ -75,14 +75,10 @@ class UserDataSet
 
         $row = $checkStatement->fetch();
 
-        $pass = false;
-        $data = new EmployerData($row);
-        if($data->getCompanyName() == null)
-        {
-            $pass = true;
+        if ($row == false) {
+            return true;
         }
-
-        return $pass;
+        else return false;
 
     }
 
@@ -118,8 +114,12 @@ class UserDataSet
         $checkStatement->bindParam(1,$email);
 
         $checkStatement->execute(); // execute the PDO statement
-        var_dump($checkStatement->fetch());
-        return is_null($checkStatement->fetch()); //should return true if null, else false
+
+
+        if ($checkStatement->fetch() == false) {
+            return true;
+        }
+        else return false;
 
 
     }

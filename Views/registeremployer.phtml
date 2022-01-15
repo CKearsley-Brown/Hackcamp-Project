@@ -1,7 +1,7 @@
 <?php require('template/header.phtml') ?>
 
 <h2>Employer</h2>
-<form method="post" action="" class="form text-primary">
+<form method="post" action="" class="form text-primary" enctype="multipart/form-data">
     <div class="form-group">
         <label for="employerEmail">Email *</label>
         <input type="email" class="form-control" placeholder="Email" name="employerEmail" required>
@@ -27,7 +27,8 @@
         <input type="text" class="form-control" placeholder="Postal Address" name="employerPostalAddress" required>
     </div>
     <div class="form-group">
-        <label for="employerImage">Image Upload *</label>
+        <label for="img">Image Upload *</label>
+        <input type="file" id="img" name="img" accept="image/*">
     </div>
     <input type="submit" class="btn btn-secondary" name="registerbutton" value="Register">
 </form>
