@@ -3,7 +3,7 @@
 $view = new stdClass();
 $view->pageTitle = 'Index';
 
-require_once('Models/Users.php');
+require_once('Models/User.php');
 $user = new User();
 $_SESSION['user'] = $user;
 
