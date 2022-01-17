@@ -148,6 +148,12 @@ class UserDataSet
         return $statement->execute(); //execute PDO Statement
     }
 
+    public function employerAcceptPlacement($relationshipID) {
+        $sqlQuery = "UPDATE Relationship SET status='2' WHERE relationship_id=$relationshipID"; //prepare SQL to query the database
+        $statement = $this->_dbHandle->prepare($sqlQuery); //prepare PDO Statement
+        return $statement->execute(); //execute PDO Statement
+    }
+
 
 
 
