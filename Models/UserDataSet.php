@@ -154,6 +154,42 @@ class UserDataSet
         return $statement->execute(); //execute PDO Statement
     }
 
+    public function employerRejectPlacement($relationshipID) {
+        $sqlQuery = "UPDATE Relationship SET status='4' WHERE relationship_id=$relationshipID"; //prepare SQL to query the database
+        $statement = $this->_dbHandle->prepare($sqlQuery); //prepare PDO Statement
+        return $statement->execute(); //execute PDO Statement
+    }
+
+    public function checkIfEmployer($userID) {
+        $sqlQuery = "SELECT * FROM Employer WHERE id_employer= ?";
+        $statement = $this->_dbHandle->prepare($sqlQuery); //prepare PDO Statement
+
+        $statement->bindParam(1, $userID);
+        $statement->execute();
+
+        $row = $statement->fetch();
+
+        if ($row == false) {
+            return false;
+        }
+        else return true;
+    }
+
+    public function checkIfStudent($userID) {
+        $sqlQuery = "SELECT * FROM Student WHERE id_student= ?";
+        $statement = $this->_dbHandle->prepare($sqlQuery); //prepare PDO Statement
+
+        $statement->bindParam(1, $userID);
+        $statement->execute();
+
+        $row = $statement->fetch();
+
+        if ($row == false) {
+            return false;
+        }
+        else return true;
+    }
+
 
 
 
