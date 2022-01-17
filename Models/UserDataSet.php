@@ -106,7 +106,6 @@ class UserDataSet
         return $statement->execute(); // execute the PDO statement
     }
 
-
     public function checkUniqueEmail($email) {
         $fetchUser = "SELECT * From Users WHERE email = ?"; // fetches a user with a given email
         $checkStatement = $this->_dbHandle->prepare($fetchUser); // prepare a PDO statement
@@ -120,10 +119,7 @@ class UserDataSet
             return true;
         }
         else return false;
-
-
     }
-
 
     public function fetchUserID($email) {
         $fetchUser = "SELECT * From Users WHERE email = ?"; // fetches a user with a given email
@@ -138,6 +134,18 @@ class UserDataSet
 
         return $user->getUserID();
 
+    }
+
+    public function studentAcceptPlacement($requestingID, $requestedID) {
+        $sqlQuery = "INSERT INTO Relationship (user_id, placement_id, status) VALUES ($requestingID,$requestedID,'1')"; //prepare SQL to query the database
+        $statement = $this->_dbHandle->prepare($sqlQuery); //prepare PDO Statement
+        return $statement->execute(); //execute PDO Statement
+    }
+
+    public function studentRejectPlacement($requestingID, $requestedID) {
+        $sqlQuery = "INSERT INTO Relationship (user_id, placement_id, status) VALUES ($requestingID,$requestedID,'3')"; //prepare SQL to query the database
+        $statement = $this->_dbHandle->prepare($sqlQuery); //prepare PDO Statement
+        return $statement->execute(); //execute PDO Statement
     }
 
 
