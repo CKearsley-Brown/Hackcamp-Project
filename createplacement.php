@@ -3,13 +3,13 @@
 $view = new stdClass();
 $view->pageTitle = 'Create Placement';
 
-if (isset($_POST["registerbutton"])) {
+if (isset($_POST["placementButton"])) {
 
     require_once('Models/PlacementDataSet.php');
 
     $placementDataSet = new PlacementDataSet();
-    // $_description,$_skillsRequired,$_salary,$_location,$_start,$_end,$_employerID,$_type
-    $placementDataSet->createNewPlacement(placementDescripton, placementSkillsRequired, placementSalary, placementLocation, placementStart, placementEnd, placementType);
+    // replace set employer to require session log in and grab the session login id
+    var_dump($placementDataSet->createNewPlacement($_POST["placementDescripton"], $_POST["placementSkillsRequired"], $_POST["placementSalary"], $_POST["placementLocation"], $_POST["placementStart"], $_POST["placementEnd"], "6", $_POST["placementType"]));
 
 }
 
