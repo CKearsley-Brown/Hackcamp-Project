@@ -28,7 +28,6 @@ class PlacementDataSet {
         return $statement->execute(); // execute the PDO statement
     }
 
-
     public function noFilter() {
         $sqlQuery = "SELECT * FROM Placement WHERE id_placement NOT IN (SELECT placement_id FROM Relationship) LIMIT 1";
         $statement = $this->_dbHandle->prepare($sqlQuery); // prepare a PDO statement
