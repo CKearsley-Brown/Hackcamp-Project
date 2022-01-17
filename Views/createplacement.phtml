@@ -1,0 +1,64 @@
+<?php require('template/header.phtml') ?>
+
+<h2>Create Placement</h2>
+<form method="post" action="" class="form text-primary" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="placementDescripton">Description *</label>
+        <textarea class="form-control" placeholder="Description" rows = "5" cols = "50" name="placementDescripton" required></textarea>
+    </div>
+    <div class="form-group">
+        <label for="placementSkillsRequired">Skills Required *</label>
+        <input type="text" class="form-control" placeholder="Skills Required" name="placementSkillsRequired" required>
+    </div>
+    <div class="form-group">
+        <label for="placementSalary">Salary *</label>
+        <input type="text" class="form-control" placeholder="Salary" name="placementSalary" required>
+    </div>
+    <div class="form-group">
+        <label for="placementLocation">Location *</label>
+        <input type="text" class="form-control" placeholder="Location" name="placementLocation" required>
+    </div>
+    <div class="form-group">
+        <label for="placementStart placementEnd">Start and End Date *</label>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <input type="date" class="form-control" name="placementStart" required>
+                </div>
+                <div class="col-sm d-flex justify-content-center">
+                    -
+                </div>
+                <div class="col-sm">
+                    <input type="date" class="form-control" name="placementStart" required>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="placementType">Type *</label>
+        <select class="form-control" name="placementType">
+            <option value="agriculture">Agriculture, Food, and Natural Resources</option>
+            <option value="architecture">Architecture and Construction</option>
+            <option value="arts">Arts, Audio/Video Technology, and Communication</option>
+            <option value="business">Business and Finance</option>
+            <option value="education">Education and Training</option>
+            <option value="government">Government and Public Administration</option>
+            <option value="health">Health Science</option>
+            <option value="it">Information Technology</option>
+            <option value="law">Law, Public Safety, Corrections, and Security</option>
+            <option value="marketing">Marketing</option>
+            <option value="science">Science, Technology, Engineering, and Math</option>
+        </select>
+    </div>
+    <input type="submit" class="btn btn-secondary" name="placementButton" value="Create Placement">
+</form>
+<?php
+if (isset($_SESSION["placementError"]))
+{
+    echo "<p class='error'>" . $_SESSION["placementError"] . "</p>";
+    unset($_SESSION["placementError"]);
+}
+?>
+
+
+<?php require('template/footer.phtml') ?>
