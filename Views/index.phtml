@@ -23,11 +23,34 @@ if (!isset($_SESSION["login"])) {
 }
 else
 {
-    echo '
-            <form method="post" action="" class="form text-primary">
-                <label>Logged in as ' . $_SESSION["login"] . '</label>
-                <input type="submit" class="btn btn-danger" name="logoutbutton" value="Logout">
-            </form>';
+    if($userTableDataSet->checkIfStudent($_SESSION['user_id']))
+    {
+        echo '
+               <h2>Matching</h2>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col d-flex justify-content-center">
+                            <form method="post" class="form text-primary">
+                                <input type="submit" class="btn btn-secondary" name="matchingNo" value="No">
+                            </form>
+                         </div>
+                        <div class="col-8 d-flex justify-content-center">
+
+                        </div>
+                        <div class="col d-flex justify-content-center">
+                            <form method="post" class="form text-primary">
+                                <input type="submit" class="btn btn-secondary" name="matchingYes" value="Yes">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+               ';
+    }
+    else if($userTableDataSet->checkIfEmployer($_SESSION['user_id']))
+    {
+        echo '<p>Logged in as Employer</p>';
+    }
 }
 ?>
 
