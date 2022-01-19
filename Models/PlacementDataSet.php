@@ -2,6 +2,7 @@
 
 require_once ('Models/Database.php');
 require_once ('Models/PlacementData.php');
+require_once ('Models/RelationshipData.php');
 
 class PlacementDataSet {
 
@@ -42,6 +43,20 @@ class PlacementDataSet {
         return $dataSet;
     }
 
+    public function noFilter2($uid) {
+        $sqlQuery = "SELECT * FROM Placement WHERE Placement.id_placement NOT IN(SELECT placement_id FROM Relationship WHERE user_id = $uid) LIMIT 1";
+        $statement = $this->_dbHandle->prepare($sqlQuery); // prepare a PDO statement
+
+        $statement->execute(); // execute the PDO statement
+
+        $dataSet = [];
+        while ($row = $statement->fetch()) {
+            $dataSet[] = new UserData($row);
+        }
+        return $dataSet;
+    }
+
+
     public function filterByType($type) {
         $sqlQuery = "SELECT * FROM Placement WHERE type = ? AND id_placement NOT IN (SELECT placement_id FROM Relationship) LIMIT 1";
 
@@ -56,12 +71,7 @@ class PlacementDataSet {
             $dataSet[] = new UserData($row);
         }
         return $dataSet;
-
-
     }
-
-
-
 }
 
 
