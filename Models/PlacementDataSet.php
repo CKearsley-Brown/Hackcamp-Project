@@ -56,7 +56,7 @@ class PlacementDataSet {
         return $dataSet;
     }
 
-
+    //takes in the
     public function filterByType($type) {
         $sqlQuery = "SELECT * FROM Placement WHERE type = ? AND id_placement NOT IN (SELECT placement_id FROM Relationship) LIMIT 1";
 
