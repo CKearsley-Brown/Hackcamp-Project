@@ -25,7 +25,7 @@ else
 {
     if($userTableDataSet->checkIfStudent($_SESSION['user_id']))
     {
-        echo '
+        ?>
                <h2>Matching</h2>
 
                 <div class="container">
@@ -35,8 +35,18 @@ else
                                 <input type="submit" class="btn btn-secondary" name="studentMatchingNo" value="No">
                             </form>
                          </div>
-                        <div class="col-8 d-flex justify-content-center">
-                            
+                        <div class="col-8 justify-content-center" style="height: 69vh">
+                            <p>Description: Software Engineer</p>
+                            <br>
+                            <p>Skills Required: Passionate, Experienced, Excellent understanding of Agile, Leadership experience, Strong Communication skills</p>
+                            <br>
+                            <p>Salary: £50,000</p>
+                            <br>
+                            <p>Location: Manchester</p>
+                            <br>
+                            <p>Start and End Date: 30/01/2022   |  30/01/2022</p>
+                            <br>
+                            <p>Type: Computer Science</p>
                         </div>
                         <div class="col d-flex justify-content-center">
                             <form method="post" class="form text-primary">
@@ -46,10 +56,11 @@ else
                     </div>
                 </div>
                ';
+        <?php
     }
     else if($userTableDataSet->checkIfEmployer($_SESSION['user_id']))
     {
-        echo '
+        ?>
                <h2>Matching</h2>
 
                 <div class="container">
@@ -60,7 +71,7 @@ else
                             </form>
                          </div>
                         <div class="col-8 d-flex justify-content-center">
-                            <embed src="$view->pageTitle; .pdf" width="800px" height="2100px" />
+                            <embed src="/images/brief.pdf" width="800vw" height="1000vh" />
                         </div>
                         <div class="col d-flex justify-content-center">
                             <form method="post" class="form text-primary">
@@ -70,6 +81,7 @@ else
                     </div>
                 </div>
                ';
+        <?php
     }
 }
 ?>
