@@ -30,9 +30,12 @@ class PlacementDataSet {
         return $statement->execute(); // execute the PDO statement
     }
 
-    public function noFilter() {
-        $sqlQuery = "SELECT * FROM Placement WHERE id_placement NOT IN (SELECT placement_id FROM Relationship) LIMIT 1";
+    //generic no filter that returns any placements that have not been interacted with by the student logged in
+    public function noFilter($uid) {
+        $sqlQuery = "SELECT * FROM Placement WHERE Placement.id_placement NOT IN(SELECT placement_id FROM Relationship WHERE user_id = ?) LIMIT 1";
         $statement = $this->_dbHandle->prepare($sqlQuery); // prepare a PDO statement
+
+        $statement->bindParam(1,$uid);
 
         $statement->execute(); // execute the PDO statement
 
@@ -43,9 +46,12 @@ class PlacementDataSet {
         return $dataSet;
     }
 
-    public function noFilter2($uid) {
-        $sqlQuery = "SELECT * FROM Placement WHERE Placement.id_placement NOT IN(SELECT placement_id FROM Relationship WHERE user_id = $uid) LIMIT 1";
+    //get the $pid from the session user_id to view all placements made by the employer logged in
+    public function employerViewAllPlacements($pid){
+        $sqlQuery = "SELECT * FROM Placement WHERE employer_id=?";
         $statement = $this->_dbHandle->prepare($sqlQuery); // prepare a PDO statement
+
+        $statement->bindParam(1,$pid);
 
         $statement->execute(); // execute the PDO statement
 
@@ -56,13 +62,14 @@ class PlacementDataSet {
         return $dataSet;
     }
 
-    //takes in the
-    public function filterByType($type) {
-        $sqlQuery = "SELECT * FROM Placement WHERE type = ? AND id_placement NOT IN (SELECT placement_id FROM Relationship) LIMIT 1";
+    //still applies the no filter function but with an additional filter by placement type
+    public function filterByType($type,$uid) {
+        $sqlQuery = "SELECT * FROM Placement WHERE type = ? AND Placement.id_placement NOT IN(SELECT placement_id FROM Relationship WHERE user_id = ?) LIMIT 1";
 
         $statement = $this->_dbHandle->prepare($sqlQuery); // prepare a PDO statement
 
         $statement->bindParam(1,$type);
+        $statement->bindParam(2,$uid);
 
         $statement->execute(); // execute the PDO statement
 

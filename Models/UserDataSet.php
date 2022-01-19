@@ -136,30 +136,51 @@ class UserDataSet
 
     }
 
+    //takes the user_id as input and returns the cv for that user, only if they are a student
+    public function fetchCV($uid) {
+        $sqlQuery = "SELECT * From Student WHERE id_student = ?"; // fetches a user with a given email
+        $statement = $this->_dbHandle->prepare($sqlQuery); // prepare a PDO statement
+
+        $statement->bindParam(1,$uid);
+
+        $statement->execute(); // execute the PDO statement
+
+        $row = $statement->fetch();
+        $student = new StudentData($row);         //returns the cv
+
+        return $student->getCV();
+
+    }
+
+    //takes the session user_id as input and the placement_id they are viewing and accepts the placement by inserting status 1 into the Relationship table
     public function studentAcceptPlacement($requestingID, $requestedID) {
         $sqlQuery = "INSERT INTO Relationship (user_id, placement_id, status) VALUES ($requestingID,$requestedID,'1')"; //prepare SQL to query the database
         $statement = $this->_dbHandle->prepare($sqlQuery); //prepare PDO Statement
         return $statement->execute(); //execute PDO Statement
     }
 
+    //takes the session user_id as input and the placement_id they are viewing and rejects the placement by inserting status 3 into the Relationship table
     public function studentRejectPlacement($requestingID, $requestedID) {
         $sqlQuery = "INSERT INTO Relationship (user_id, placement_id, status) VALUES ($requestingID,$requestedID,'3')"; //prepare SQL to query the database
         $statement = $this->_dbHandle->prepare($sqlQuery); //prepare PDO Statement
         return $statement->execute(); //execute PDO Statement
     }
 
+    //updates the pre-existing relationship by the employer accepting the student and updating the status to 2 in the Relationship table
     public function employerAcceptPlacement($relationshipID) {
         $sqlQuery = "UPDATE Relationship SET status='2' WHERE relationship_id=$relationshipID"; //prepare SQL to query the database
         $statement = $this->_dbHandle->prepare($sqlQuery); //prepare PDO Statement
         return $statement->execute(); //execute PDO Statement
     }
 
+    //updates the pre-existing relationship by the employer rejecting the student and updating the status to 4 in the Relationship table
     public function employerRejectPlacement($relationshipID) {
         $sqlQuery = "UPDATE Relationship SET status='4' WHERE relationship_id=$relationshipID"; //prepare SQL to query the database
         $statement = $this->_dbHandle->prepare($sqlQuery); //prepare PDO Statement
         return $statement->execute(); //execute PDO Statement
     }
 
+    //takes the session user_id and checks if the user id exists in the Employer table
     public function checkIfEmployer($userID) {
         $sqlQuery = "SELECT * FROM Employer WHERE id_employer= ?";
         $statement = $this->_dbHandle->prepare($sqlQuery); //prepare PDO Statement
@@ -175,6 +196,7 @@ class UserDataSet
         else return true;
     }
 
+    //takes the session user_id and checks if the user id exists in the Student table
     public function checkIfStudent($userID) {
         $sqlQuery = "SELECT * FROM Student WHERE id_student= ?";
         $statement = $this->_dbHandle->prepare($sqlQuery); //prepare PDO Statement
@@ -190,8 +212,8 @@ class UserDataSet
         else return true;
     }
 
-    public function studentAcceptedPlacements() {
-        $sqlQuery = "SELECT * FROM Relationship WHERE status=1"; //prepare SQL to query the database
+    public function studentAcceptedPlacements($pid) {
+        $sqlQuery = "SELECT user_id FROM Relationship WHERE status=1 AND placement_id=$pid"; //prepare SQL to query the database
 
         $statement = $this->_dbHandle->prepare($sqlQuery); // prepare a PDO statement
         $statement->execute(); // execute the PDO statement
