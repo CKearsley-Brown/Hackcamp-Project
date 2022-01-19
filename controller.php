@@ -16,4 +16,6 @@ if (isset($_POST["logoutbutton"]))
     session_destroy();
     $user = new User();
     $_SESSION['user'] = $user;
+    header("Location: index.php");
+    exit;
 }

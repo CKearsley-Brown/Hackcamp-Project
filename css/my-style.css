@@ -1,0 +1,44 @@
+/*General CSS*/
+*{
+    font-family: Helvetica , Arial, Verdana, sans-serif;
+    box-sizing: border-box;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section{
+    display:block;
+}
+
+body {
+    font-size: medium;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin:0px;
+}
+
+h1,h2,h3,h4,h5,h6
+{
+    color: rgb(15,65,27);
+}
+
+#title{
+    background-color: black;
+    color: white;
+    width: 100%;
+}
+
+#menu {
+    background-color: black;
+    color: white;
+}
+
+footer {
+    background-color: rgb(15,65,27);
+    color: white;
+    max-resolution: 0px;
+}
+
+footer img {
+    width: 30px;
+    margin-right: 10px;
+    border:none;
+}
