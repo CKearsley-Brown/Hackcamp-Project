@@ -15,10 +15,10 @@ if (!isset($_SESSION["login"])) {
                 </div>
                 <input type="submit" class="btn btn-primary" name="loginbutton" value="Login">
             </form>';
-    if (isset($_SESSION["error"]))
+    if (isset($_SESSION["loginError"]))
     {
-        echo "<p class='error'>" . $_SESSION["error"] . "</p>";
-        unset($_SESSION["error"]);
+        echo "<p class='error'>" . $_SESSION["loginError"] . "</p>";
+        unset($_SESSION["loginError"]);
     }
 }
 else

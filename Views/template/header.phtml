@@ -21,7 +21,6 @@
 
 <div class="container">
     <div class="row">
-        <!--  <img id="logo" src="images/" alt="Logo Image" />  -->
         <div id="title" class="col-xs-12">
             <div id="logo-text" class="pull-right"> <h1>HackCamp group 18</h1> </div>
             <div class="pull-right"> <h2><?php echo $view->pageTitle ?> </h2></div>
@@ -30,25 +29,30 @@
 
     <div class="row">
         <div id="menu" class="col-xs-6 col-sm-3 col-md-2">
-        <ul class="nav navbar_default nav-stacked">
-
-        </ul>
             <?php
-            if (isset($_SESSION["login"])) {
-            echo '
+            if ($_SESSION['user']->getLogStatus()) {
+                echo '
             <form method="post" action="" class="form text-primary">
                 <label>Logged in as ' . $_SESSION["login"] . '</label>
                 <input type="submit" class="btn btn-danger" name="logoutbutton" value="Logout">
             </form>';
             }
-            ?>
 
-            <li><a href="index.php">Login</a></li>
-            <li><a href="register.php">Register</a></li>
-            <li><a href="createplacement.php">Create Placement</a></li>
-            <li><a href="matching.php">Matching</a></li>
-            <li><a href="#">Edit Profile</a></li>
-            <li><a href="#">Applied Students (Only Visible for Logged in Staff Accounts)</a></li>
-        </ul>
+            if ($_SESSION['user']->getLogStatus()) {
+                if ($userTableDataSet->checkIfEmployer($_SESSION['user_id'])) {
+                    echo '<li><a href = "createplacement.php" > Create Placement </a ></li>';
+                    echo '<li><a href = "matching.php" > Matching</a ></li>';
+                    echo '<li><a href = "#" > Edit Profile </a ></li>';
+                    echo '<li><a href = "#" > Applied Students(Only Visible for Logged in Staff Accounts)</a ></li>';
+                }
+                elseif ($userTableDataSet->checkIfStudent($_SESSION['user_id']))
+                {
+                    echo '<li><a href = "#" > Edit CV </a ></li>';
+                }
+            } else {
+                echo '<li><a href = "index.php" > Login</a ></li>';
+                echo '<li><a href = "register.php" > Register</a ></li>';
+            }
+            ?>
         </div>
     <div id="content" class="col-xs-6 col-sm-9 col-md-10">

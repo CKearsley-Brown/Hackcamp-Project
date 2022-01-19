@@ -1,19 +1,18 @@
 <?php
+require_once('controller.php');
 
 $view = new stdClass();
 $view->pageTitle = 'Index';
 
-require_once('Models/User.php');
-require_once('Models/UserData.php');
-$user = new User();
-$_SESSION['user'] = $user;
+unset($_SESSION["loginError"]);
 
 // Collect username and password for checking with password_verify
 if (isset($_POST["loginbutton"]))
 {
-    $user->AttemptLoginUser($_POST["email"],$_POST["password"]);
+    if (!$_SESSION['user']->AttemptLoginUser($_POST["email"],$_POST["password"]))
+    {
+        $_SESSION["loginError"] = "Incorrect Email or Password.";
+    }
 }
 
-
-require_once('controller.php');
 require_once('Views/index.phtml');

@@ -1,7 +1,10 @@
 <?php
+require_once('controller.php');
 
 $view = new stdClass();
-$view->pageTitle = 'Register';
+$view->pageTitle = 'Register Employer';
+
+unset($_SESSION["registerError"]);
 
 // Registering a new user to the database.
 if (isset($_POST["registerbutton"])) {
@@ -20,8 +23,7 @@ if (isset($_POST["registerbutton"])) {
             $target_file = null;
         }
         else {
-            $target_file = $target_dir . basename($_FILES["img"]["name"]);
-            //var_dump($_FILES["img"]["name"]);
+            $target_file = $target_dir . $_SESSION('user_id'). "_img";
             $upload = 0; // whether the file will be uploaded, no by default
             $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
             // Check if image file is an actual image or fake image
@@ -31,7 +33,7 @@ if (isset($_POST["registerbutton"])) {
                 $upload = 1; // sets upload to yes
             }
             else {
-                $message = "File is not an image.";
+                $_SESSION["registerError"] = "File is not an image.";
                 $upload = 0;
             }
         }
@@ -49,5 +51,4 @@ if (isset($_POST["registerbutton"])) {
     }
 }
 
-require_once('controller.php');
 require_once('Views/registeremployer.phtml');
