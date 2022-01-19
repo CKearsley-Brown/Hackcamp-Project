@@ -36,7 +36,7 @@ else
                             </form>
                          </div>
                         <div class="col-8 d-flex justify-content-center">
-
+                            <embed src="<?php echo $view->pageTitle; ?>.pdf" width="800px" height="2100px" />
                         </div>
                         <div class="col d-flex justify-content-center">
                             <form method="post" class="form text-primary">
@@ -49,7 +49,27 @@ else
     }
     else if($userTableDataSet->checkIfEmployer($_SESSION['user_id']))
     {
-        echo '<p>Logged in as Employer</p>';
+        echo '
+               <h2>Matching</h2>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col d-flex justify-content-center">
+                            <form method="post" class="form text-primary">
+                                <input type="submit" class="btn btn-secondary" name="matchingNo" value="No">
+                            </form>
+                         </div>
+                        <div class="col-8 d-flex justify-content-center">
+
+                        </div>
+                        <div class="col d-flex justify-content-center">
+                            <form method="post" class="form text-primary">
+                                <input type="submit" class="btn btn-secondary" name="matchingYes" value="Yes">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+               ';
     }
 }
 ?>
