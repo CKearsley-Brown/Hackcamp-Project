@@ -58,7 +58,7 @@ h1,h2,h3,h4,h5,h6
 
 #menu label,a {
     color: white;
-    padding-top: 2vh;
+    margin-top: 2vh;
 }
 
 #menu a:hover {
