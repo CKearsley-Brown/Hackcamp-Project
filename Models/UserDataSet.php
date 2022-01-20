@@ -263,24 +263,20 @@ class UserDataSet
     }
 
 
-
-    //DOES NOT FULLY WORK YET !!!!!!!!!!!!
-    public function StudentEditProfile($uid, $_name, $_phone_number, $_postal_address, $_password, $_cv) {
-        $sqlQuery = "UPDATE Users SET name=?, phone_number=?, postal_address=?, password=? WHERE user_id=$uid;
+    public function StudentEditProfile($uid, $_name, $_phone_number, $_postal_address, $_cv) {
+        $sqlQuery = "UPDATE Users SET name=?, phone_number=?, postal_address=?, WHERE user_id=$uid;
                      UPDATE Student SET cv=? WHERE user_id=$uid";
 
         $statement = $this->_dbHandle->prepare($sqlQuery); // prepare a PDO statement
 
-        $statement->bindColumn(1, $_name);
-        $statement->bindColumn(2, $_phone_number);
-        $statement->bindColumn(3, $_postal_address);
-        $statement->bindColumn(4, $_password);
-        $statement->bindColumn(5, $_cv);
+        $statement->bindParam(1, $_name);
+        $statement->bindParam(2, $_phone_number);
+        $statement->bindParam(3, $_postal_address);
+        $statement->bindParam(4, $_cv);
 
         return $statement->execute(); //execute PDO
 
     }
-    //DOES NOT FULLY WORK YET !!!!!!!!!!!!
 
 
     public function EmployerReturnProfile($uid) {

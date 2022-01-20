@@ -62,6 +62,49 @@ class PlacementDataSet {
         return $dataSet;
     }
 
+    public function fetchSpecificPlacement($pid) {
+        $sqlQuery = "SELECT * FROM Placement WHERE id_placement=?";
+        $statement = $this->_dbHandle->prepare($sqlQuery); // prepare a PDO statement
+
+        $statement->bindParam(1,$pid);
+
+        $statement->execute(); // execute the PDO statement
+
+        $row = $statement->fetch();
+        //returns the placement specific to the ID
+
+        return new placementData($row);
+    }
+
+    public function deletePlacement($pid) {
+        $sqlQuery = "DELETE FROM Relationship WHERE placement_id=1;
+                     DELETE FROM Placement WHERE id_placement=1";
+
+        $statement = $this->_dbHandle->prepare($sqlQuery); //prepare PDO Statement
+
+        $statement->bindParam(1,$pid);
+
+        return $statement->execute(); //execute PDO Statement
+
+
+    }
+
+    public function editPlacement($pid, $_description, $_skillsRequired, $_salary, $_location, $_start, $_end, $_type) {
+        $sqlQuery = "UPDATE Placement SET description=?, skills_required=?, salary=?, location=?, start=?, end=?, type=? WHERE id_placement=$pid";
+
+        $statement = $this->_dbHandle->prepare($sqlQuery); // prepare a PDO statement
+
+        $statement->bindParam(1, $_description);
+        $statement->bindParam(2, $_skillsRequired);
+        $statement->bindParam(3, $_salary);
+        $statement->bindParam(4, $_location);
+        $statement->bindParam(5, $_start);
+        $statement->bindParam(6, $_end);
+        $statement->bindParam(7, $_type);
+
+        return $statement->execute(); //execute PDO
+    }
+
     //still applies the no filter function but with an additional filter by placement type
     public function filterByType($type,$uid) {
         $sqlQuery = "SELECT * FROM Placement WHERE type = ? AND Placement.id_placement NOT IN(SELECT placement_id FROM Relationship WHERE user_id = ?) LIMIT 1";
