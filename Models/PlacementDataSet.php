@@ -46,12 +46,12 @@ class PlacementDataSet {
         return $dataSet;
     }
 
-    //get the $pid from the session user_id to view all placements made by the employer logged in
-    public function employerViewAllPlacements($pid){
+    //get the $eid from the session user_id to view all placements made by the employer logged in
+    public function employerViewAllPlacements($eid){
         $sqlQuery = "SELECT * FROM Placement WHERE employer_id=?";
         $statement = $this->_dbHandle->prepare($sqlQuery); // prepare a PDO statement
 
-        $statement->bindParam(1,$pid);
+        $statement->bindParam(1,$eid);
 
         $statement->execute(); // execute the PDO statement
 
