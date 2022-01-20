@@ -47,13 +47,14 @@ h1,h2,h3,h4,h5,h6
     background-color: white;
     padding: 2%;
     border-top: 5px solid rgb(31, 128, 50);
-    border-left: 5px solid rgb(31, 128, 50);
+    border-bottom: 5px solid rgb(31, 128, 50);
 }
 
 #menu {
     background-color: black;
     color: white;
     border-top: 5px solid rgb(31, 128, 50);
+    border-bottom: 5px solid rgb(31, 128, 50);
 }
 
 #menu label,a {
