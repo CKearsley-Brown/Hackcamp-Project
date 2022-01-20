@@ -133,7 +133,6 @@ class UserDataSet
         $user = new UserData($row);         //returns the user ID
 
         return $user->getUserID();
-
     }
 
     //takes the user_id as input and returns the cv for that user, only if they are a student
@@ -149,7 +148,6 @@ class UserDataSet
         $student = new StudentData($row);         //returns the cv
 
         return $student->getCV();
-
     }
 
     //takes the session user_id as input and the placement_id they are viewing and accepts the placement by inserting status 1 into the Relationship table
@@ -167,16 +165,26 @@ class UserDataSet
     }
 
     //updates the pre-existing relationship by the employer accepting the student and updating the status to 2 in the Relationship table
-    public function employerAcceptPlacement($relationshipID) {
-        $sqlQuery = "UPDATE Relationship SET status='2' WHERE relationship_id=$relationshipID"; //prepare SQL to query the database
+    public function employerAcceptPlacement($uid,$pid) {
+        $sqlQuery = "UPDATE Relationship SET status='2' WHERE user_id= ? AND placement_id= ?"; //prepare SQL to query the database
+
         $statement = $this->_dbHandle->prepare($sqlQuery); //prepare PDO Statement
+
+        $statement->bindParam(1,$uid);
+        $statement->bindParam(2,$pid);
+
         return $statement->execute(); //execute PDO Statement
     }
 
     //updates the pre-existing relationship by the employer rejecting the student and updating the status to 4 in the Relationship table
-    public function employerRejectPlacement($relationshipID) {
-        $sqlQuery = "UPDATE Relationship SET status='4' WHERE relationship_id=$relationshipID"; //prepare SQL to query the database
+    public function employerRejectPlacement($uid,$pid) {
+        $sqlQuery = "UPDATE Relationship SET status='4' WHERE user_id= ? AND placement_id= ?"; //prepare SQL to query the database
+
         $statement = $this->_dbHandle->prepare($sqlQuery); //prepare PDO Statement
+
+        $statement->bindParam(1,$uid);
+        $statement->bindParam(2,$pid);
+
         return $statement->execute(); //execute PDO Statement
     }
 
