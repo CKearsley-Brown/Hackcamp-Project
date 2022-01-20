@@ -29,6 +29,9 @@ else
                <h2>Matching</h2>
 
                 <div class="container">
+                    <?php
+                    if (!empty($view->placementDataSet)) {
+                    ?>
                     <div class="row">
                         <div class="col d-flex justify-content-center">
                             <form method="post" class="form text-primary">
@@ -36,17 +39,17 @@ else
                             </form>
                          </div>
                         <div class="col-8 justify-content-center" style="height: 69vh">
-                            <p>Description: Software Engineer</p>
+                            <p>Description: <?php echo $view->placementDataSet[0]->getDescription() ?></p>
                             <br>
-                            <p>Skills Required: Passionate, Experienced, Excellent understanding of Agile, Leadership experience, Strong Communication skills</p>
+                            <p>Skills Required: <?php echo $view->placementDataSet[0]->getSkillsRequired() ?></p>
                             <br>
-                            <p>Salary: £50,000</p>
+                            <p>Salary: <?php echo $view->placementDataSet[0]->getSalary() ?></p>
                             <br>
-                            <p>Location: Manchester</p>
+                            <p>Location: <?php echo $view->placementDataSet[0]->getLocation() ?></p>
                             <br>
-                            <p>Start and End Date: 30/01/2022   |  30/01/2022</p>
+                            <p>Start and End Date: <?php echo $view->placementDataSet[0]->getStart() ?>   |  <?php echo  $view->placementDataSet[0]->getEnd() ?></p>
                             <br>
-                            <p>Type: Computer Science</p>
+                            <p>Type: <?php echo $view->placementDataSet[0]->getType() ?> </p>
                         </div>
                         <div class="col d-flex justify-content-center">
                             <form method="post" class="form text-primary">
@@ -54,6 +57,15 @@ else
                             </form>
                         </div>
                     </div>
+                    <?php
+                    }
+                    else
+                    {
+                    ?>
+                    <p>Currently there are no placements available. Please check back again later.</p>
+                    <?php
+                    }
+                    ?>
                 </div>
         <?php
     }
@@ -70,7 +82,7 @@ else
                             </form>
                          </div>
                         <div class="col-8 d-flex justify-content-center">
-                            <embed src="/images/brief.pdf" width="800vw" height="1000vh" />
+                            <embed src="/CVs/brief.pdf" width="800vw" height="1000vh" />
                         </div>
                         <div class="col d-flex justify-content-center">
                             <form method="post" class="form text-primary">

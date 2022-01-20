@@ -41,7 +41,7 @@ class PlacementDataSet {
 
         $dataSet = [];
         while ($row = $statement->fetch()) {
-            $dataSet[] = new UserData($row);
+            $dataSet[] = new PlacementData($row);
         }
         return $dataSet;
     }
@@ -57,7 +57,7 @@ class PlacementDataSet {
 
         $dataSet = [];
         while ($row = $statement->fetch()) {
-            $dataSet[] = new UserData($row);
+            $dataSet[] = new PlacementData($row);
         }
         return $dataSet;
     }
@@ -75,7 +75,7 @@ class PlacementDataSet {
 
         $dataSet = [];
         while ($row = $statement->fetch()) {
-            $dataSet[] = new UserData($row);
+            $dataSet[] = new PlacementData($row);
         }
         return $dataSet;
     }

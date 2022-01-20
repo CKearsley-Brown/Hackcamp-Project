@@ -15,36 +15,39 @@ if (isset($_POST["loginbutton"]))
     }
 }
 
-// REPLACE PLACEMENT_ID !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-if (isset($_POST["studentMatchingYes"]))
-{
+
+
+// If logged in as student, get next placement if any
+if($userTableDataSet->checkIfStudent($_SESSION['user_id'])) {
     require_once('Models/PlacementDataSet.php');
     $placementDataSet = new PlacementDataSet();
-    $placementDataSet->studentAcceptPlacement($_SESSION['user_id'], $placement_id);
+    $view->placementDataSet = $placementDataSet->noFilter($_SESSION['user_id']);
 }
 
-// REPLACE PLACEMENT_ID !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// Student Accepts Placement
+if (isset($_POST["studentMatchingYes"]))
+{
+    $userTableDataSet->studentAcceptPlacement($_SESSION['user_id'], $view->placementDataSet[0]->getPlacementID());
+    header("Refresh:0");
+}
+
+// Student Rejects Placement
 if (isset($_POST["studentMatchingNo"]))
 {
-    require_once('Models/PlacementDataSet.php');
-    $placementDataSet = new PlacementDataSet();
-    $placementDataSet->studentRejectPlacement($_SESSION['user_id'], $placement_id);
+    $userTableDataSet->studentRejectPlacement($_SESSION['user_id'], $view->placementDataSet[0]->getPlacementID());
+    header("Refresh:0");
 }
 
 // REPLACE RELATIONSHIP_ID !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 if (isset($_POST["employerMatchingYes"]))
 {
-    require_once('Models/PlacementDataSet.php');
-    $placementDataSet = new PlacementDataSet();
-    $placementDataSet->employerAcceptPlacement($relationship_id);
+    $userTableDataSet->employerAcceptPlacement($relationship_id);
 }
 
 // REPLACE RELATIONSHIP_ID !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 if (isset($_POST["employerMatchingNo"]))
 {
-    require_once('Models/PlacementDataSet.php');
-    $placementDataSet = new PlacementDataSet();
-    $placementDataSet->employerRejectPlacement($relationship_id);
+    $userTableDataSet->employerRejectPlacement($relationship_id);
 }
 
 require_once('Views/index.phtml');
