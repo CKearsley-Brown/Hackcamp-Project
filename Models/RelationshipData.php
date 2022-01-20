@@ -1,6 +1,6 @@
 <?php
 
-class RelationshipData extends StudentData{
+class RelationshipData {
     
     protected $_relationshipID, $_userID, $_placementID, $_status, $_studentID, $_cv ;
     
@@ -9,8 +9,6 @@ class RelationshipData extends StudentData{
         $this->_userID = $dbRow['user_id'];
         $this->_placementID = $dbRow['placement_id'];
         $this->_status = $dbRow['status'];
-        $this->_studentID = $dbRow['id_student'];
-        $this->_cv = $dbRow['cv'];
     }
 
     /**

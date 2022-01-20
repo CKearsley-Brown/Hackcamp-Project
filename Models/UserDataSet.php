@@ -233,7 +233,72 @@ class UserDataSet
         return $dataSet;
     }
 
+    public function deleteStudent($uid) {
+        $sqlQuery = "DELETE FROM Relationship WHERE user_id=?;
+                     DELETE FROM Student WHERE id_student=?;
+                     DELETE FROM Users WHERE user_id=?";
 
+        $statement = $this->_dbHandle->prepare($sqlQuery); //prepare PDO Statement
+
+        $statement->bindParam(1,$uid);
+
+        return $statement->execute(); //execute PDO Statement
+    }
+
+    public function studentReturnProfile($uid) {
+        $sqlQuery = "SELECT Users.name,Users.phone_number,Users.postal_address,Users.password,Student.cv 
+                     FROM Users
+                     INNER JOIN Student ON Users.user_id=Student.id_student
+                     WHERE Users.user_id=?"; //prepare SQL to query the database
+        $statement = $this->_dbHandle->prepare($sqlQuery); // prepare a PDO statement
+
+        $statement->bindParam(1, $uid);
+        $statement->execute();
+
+        $dataSet = []; //create dataset to store query data
+        while ($row = $statement->fetch()) {
+            $dataSet[] = new UserData($row);
+        }
+        return $dataSet;
+    }
+
+
+
+    //DOES NOT FULLY WORK YET !!!!!!!!!!!!
+    public function StudentEditProfile($uid, $_name, $_phone_number, $_postal_address, $_password, $_cv) {
+        $sqlQuery = "UPDATE Users SET name=?, phone_number=?, postal_address=?, password=? WHERE user_id=$uid;
+                     UPDATE Student SET cv=? WHERE user_id=$uid";
+
+        $statement = $this->_dbHandle->prepare($sqlQuery); // prepare a PDO statement
+
+        $statement->bindColumn(1, $_name);
+        $statement->bindColumn(2, $_phone_number);
+        $statement->bindColumn(3, $_postal_address);
+        $statement->bindColumn(4, $_password);
+        $statement->bindColumn(5, $_cv);
+
+        return $statement->execute(); //execute PDO
+
+    }
+    //DOES NOT FULLY WORK YET !!!!!!!!!!!!
+
+
+    public function EmployerReturnProfile($uid) {
+        $sqlQuery = "SELECT Users.name,Users.phone_number,Users.postal_address,Users.password,Employer.image,Employer.company_name 
+                     FROM Users 
+                     INNER JOIN Employer ON Users.user_id=Employer.id_Employer 
+                     WHERE Users.user_id=?"; //prepare SQL to query the database
+        $statement = $this->_dbHandle->prepare($sqlQuery); // prepare a PDO statement
+
+        $statement->bindParam(1, $uid);
+        $statement->execute();
+
+        $dataSet = []; //create dataset to store query data
+        while ($row = $statement->fetch()) {
+            $dataSet[] = new UserData($row);
+        }
+        return $dataSet;
+    }
 
 
 }
