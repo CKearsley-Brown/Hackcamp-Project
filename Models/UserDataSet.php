@@ -257,7 +257,7 @@ class UserDataSet
 
         $dataSet = []; //create dataset to store query data
         while ($row = $statement->fetch()) {
-            $dataSet[] = new UserData($row);
+            $dataSet[] = new StudentData($row);
         }
         return $dataSet;
     }
@@ -295,7 +295,7 @@ class UserDataSet
 
         $dataSet = []; //create dataset to store query data
         while ($row = $statement->fetch()) {
-            $dataSet[] = new UserData($row);
+            $dataSet[] = new EmployerData($row);
         }
         return $dataSet;
     }
