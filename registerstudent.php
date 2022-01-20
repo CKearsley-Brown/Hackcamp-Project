@@ -23,7 +23,9 @@ if (isset($_POST["registerbutton"])) {
             $target_file = null;
         }
         else {
-            $target_file = $target_dir . $_SESSION('user_id'). "_cv";
+            $tempFileExt = explode('.', $_FILES["file"]["name"]);
+            $fileExt = strtolower(end($tempFileExt));
+            $target_file = $target_dir . $userID . "_cv." . $fileExt;
             $upload = 0; // whether the file will be uploaded, no by default
             $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
             // Check if image file is an actual image or fake image
@@ -44,7 +46,7 @@ if (isset($_POST["registerbutton"])) {
             $userDataSet->insertNewStudent($userID, $target_file);
         }
         else {
-            $userDataSet->insertNewStudent($userID, "testPath");
+            $_SESSION["registerError"] = "Please input a CV.";
         }
     }
     else {

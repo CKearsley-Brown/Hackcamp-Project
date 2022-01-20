@@ -23,7 +23,9 @@ if (isset($_POST["registerbutton"])) {
             $target_file = null;
         }
         else {
-            $target_file = $target_dir . $_SESSION('user_id'). "_img";
+            $tempFileExt = explode('.', $_FILES["img"]["name"]);
+            $fileExt = strtolower(end($tempFileExt));
+            $target_file = $target_dir . $userID . "_img." . $fileExt;
             $upload = 0; // whether the file will be uploaded, no by default
             $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
             // Check if image file is an actual image or fake image
@@ -43,7 +45,7 @@ if (isset($_POST["registerbutton"])) {
             $userDataSet->insertNewEmployer($userID, $target_file, strtolower($_POST["employerCompanyName"]));
         }
         else {
-            $userDataSet->insertNewEmployer($userID, "testPath" , strtolower($_POST["employerCompanyName"]));
+            $_SESSION["registerError"] = "Please input an image.";
         }
     }
     else {

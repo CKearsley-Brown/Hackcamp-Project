@@ -15,39 +15,36 @@ if (isset($_POST["loginbutton"]))
     }
 }
 
+// if logged in
+if (isset($_SESSION["login"])) {
+    // If logged in as student, get next placement if any
+    if ($userTableDataSet->checkIfStudent($_SESSION['user_id'])) {
+        require_once('Models/PlacementDataSet.php');
+        $placementDataSet = new PlacementDataSet();
+        $view->placementDataSet = $placementDataSet->noFilter($_SESSION['user_id']);
+    }
 
+    // Student Accepts Placement
+    if (isset($_POST["studentMatchingYes"])) {
+        $userTableDataSet->studentAcceptPlacement($_SESSION['user_id'], $view->placementDataSet[0]->getPlacementID());
+        header("Refresh:0");
+    }
 
-// If logged in as student, get next placement if any
-if($userTableDataSet->checkIfStudent($_SESSION['user_id'])) {
-    require_once('Models/PlacementDataSet.php');
-    $placementDataSet = new PlacementDataSet();
-    $view->placementDataSet = $placementDataSet->noFilter($_SESSION['user_id']);
-}
+    // Student Rejects Placement
+    if (isset($_POST["studentMatchingNo"])) {
+        $userTableDataSet->studentRejectPlacement($_SESSION['user_id'], $view->placementDataSet[0]->getPlacementID());
+        header("Refresh:0");
+    }
 
-// Student Accepts Placement
-if (isset($_POST["studentMatchingYes"]))
-{
-    $userTableDataSet->studentAcceptPlacement($_SESSION['user_id'], $view->placementDataSet[0]->getPlacementID());
-    header("Refresh:0");
-}
+    // REPLACE RELATIONSHIP_ID !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    if (isset($_POST["employerMatchingYes"])) {
+        $userTableDataSet->employerAcceptPlacement($relationship_id);
+    }
 
-// Student Rejects Placement
-if (isset($_POST["studentMatchingNo"]))
-{
-    $userTableDataSet->studentRejectPlacement($_SESSION['user_id'], $view->placementDataSet[0]->getPlacementID());
-    header("Refresh:0");
-}
-
-// REPLACE RELATIONSHIP_ID !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-if (isset($_POST["employerMatchingYes"]))
-{
-    $userTableDataSet->employerAcceptPlacement($relationship_id);
-}
-
-// REPLACE RELATIONSHIP_ID !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-if (isset($_POST["employerMatchingNo"]))
-{
-    $userTableDataSet->employerRejectPlacement($relationship_id);
+    // REPLACE RELATIONSHIP_ID !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    if (isset($_POST["employerMatchingNo"])) {
+        $userTableDataSet->employerRejectPlacement($relationship_id);
+    }
 }
 
 require_once('Views/index.phtml');
