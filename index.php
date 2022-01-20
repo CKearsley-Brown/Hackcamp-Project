@@ -15,4 +15,36 @@ if (isset($_POST["loginbutton"]))
     }
 }
 
+// REPLACE PLACEMENT_ID !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+if (isset($_POST["studentMatchingYes"]))
+{
+    require_once('Models/PlacementDataSet.php');
+    $placementDataSet = new PlacementDataSet();
+    $placementDataSet->studentAcceptPlacement($_SESSION['user_id'], $placement_id);
+}
+
+// REPLACE PLACEMENT_ID !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+if (isset($_POST["studentMatchingNo"]))
+{
+    require_once('Models/PlacementDataSet.php');
+    $placementDataSet = new PlacementDataSet();
+    $placementDataSet->studentRejectPlacement($_SESSION['user_id'], $placement_id);
+}
+
+// REPLACE RELATIONSHIP_ID !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+if (isset($_POST["employerMatchingYes"]))
+{
+    require_once('Models/PlacementDataSet.php');
+    $placementDataSet = new PlacementDataSet();
+    $placementDataSet->employerAcceptPlacement($relationship_id);
+}
+
+// REPLACE RELATIONSHIP_ID !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+if (isset($_POST["employerMatchingNo"]))
+{
+    require_once('Models/PlacementDataSet.php');
+    $placementDataSet = new PlacementDataSet();
+    $placementDataSet->employerRejectPlacement($relationship_id);
+}
+
 require_once('Views/index.phtml');
