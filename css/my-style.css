@@ -13,6 +13,7 @@ body {
     margin-top: 0px;
     margin-bottom: 0px;
     margin:0px;
+    background-color: rgb(15,65,27);
 }
 
 h1,h2,h3,h4,h5,h6
@@ -22,19 +23,57 @@ h1,h2,h3,h4,h5,h6
 
 #title{
     background-color: black;
-    color: white;
+    height: 17vh;
     width: 100%;
+    padding-left: 2vw;
+    padding-top: 2vh;
+}
+
+#title img {
+    float: left;
+    vertical-align: middle;
+    height: 90%;
+}
+
+#title h1 {
+    clear: right;
+    padding-left: 10vw;
+    padding-top: 3vh;
+    color: white;
+    font-family: Tahoma, sans-serif;
+}
+
+#content {
+    background-color: white;
+    padding: 2%;
+    border-top: 5px solid rgb(31, 128, 50);
+    border-left: 5px solid rgb(31, 128, 50);
 }
 
 #menu {
     background-color: black;
     color: white;
+    border-top: 5px solid rgb(31, 128, 50);
+}
+
+#menu label,a {
+    color: white;
+    padding-top: 2vh;
+}
+
+#menu a:hover {
+    color: rgb(31, 128, 50);
+    text-decoration: none;
 }
 
 footer {
     background-color: rgb(15,65,27);
     color: white;
     max-resolution: 0px;
+}
+
+footer hr {
+    width: 25em;
 }
 
 footer img {
