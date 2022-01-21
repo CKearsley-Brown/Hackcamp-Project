@@ -1,0 +1,40 @@
+<?php require('template/header.phtml') ?>
+
+<h2>View Accepted Placements</h2>
+
+<?php
+if($userTableDataSet->checkIfStudent($_SESSION['user_id']))
+{
+?>
+    <div class="container">
+    <?php
+    if (empty($userTableDataSet->studentAcceptedPlacements($_SESSION['user_id']))) {
+        echo '<p>No placements has been created.</p>';
+    } else {
+        foreach ($userTableDataSet->studentAcceptedPlacements($_SESSION['user_id']) as $placementRelationship) {
+            require_once('Models/PlacementDataSet.php');
+            $placementDataSet = new PlacementDataSet();
+            $placementData = $placementDataSet->fetchSpecificPlacement($placementRelationship->getPlacementID());
+            ?>
+            <div class="row">
+                <div class="col-8 justify-content-center">
+                    <h3>Accepted to: <?php echo $placementData->getPlacementID() ?></h3>
+                    <p>Description: <?php echo $placementData->getDescription() ?></p>
+                    <p>Skills Required: <?php echo $placementData->getSkillsRequired() ?></p>
+                    <p>Salary: <?php echo $placementData->getSalary() ?></p>
+                    <p>Location: <?php echo $placementData->getLocation() ?></p>
+                    <p>Start and End Date: <?php echo $placementData->getStart() ?>  |  <?php echo $placementData->getEnd() ?></p>
+                    <p>Type: <?php echo $placementData->getType() ?> </p>
+                </div>
+            </div>
+    </div>
+            <?php
+        }
+    }
+} else {
+    echo "Please login to a student account to see this page";
+}
+?>
+
+
+<?php require('template/footer.phtml') ?>

@@ -220,8 +220,21 @@ class UserDataSet
         else return true;
     }
 
-    public function studentAcceptedPlacements($pid) {
+    public function studentAppliedPlacements($pid) {
         $sqlQuery = "SELECT * FROM Relationship WHERE status=1 AND placement_id=$pid"; //prepare SQL to query the database
+
+        $statement = $this->_dbHandle->prepare($sqlQuery); // prepare a PDO statement
+        $statement->execute(); // execute the PDO statement
+
+        $dataSet = []; //create dataset to store query data
+        while ($row = $statement->fetch()) {
+            $dataSet[] = new RelationshipData($row);
+        }
+        return $dataSet;
+    }
+
+    public function studentAcceptedPlacements($uid) {
+        $sqlQuery = "SELECT * FROM Relationship WHERE status=2 AND user_id=$uid"; //prepare SQL to query the database
 
         $statement = $this->_dbHandle->prepare($sqlQuery); // prepare a PDO statement
         $statement->execute(); // execute the PDO statement

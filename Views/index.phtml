@@ -92,10 +92,10 @@ else
                                         <form method="post" action="" class="form text-primary">
                                         <tbody>
                                             <?php
-                                            if (empty($userTableDataSet->studentAcceptedPlacements($placementData->getPlacementID()))) {
+                                            if (empty($userTableDataSet->studentAppliedPlacements($placementData->getPlacementID()))) {
                                                 echo '<p>No student has applied yet.</p>';
                                             } else {
-                                                foreach ($userTableDataSet->studentAcceptedPlacements($placementData->getPlacementID()) as $appliedStudent) {
+                                                foreach ($userTableDataSet->studentAppliedPlacements($placementData->getPlacementID()) as $appliedStudent) {
                                                     echo '<tr> <td>' . $appliedStudent->getUserID() . '</td> <td>' . '<a href = "CVs/'. $appliedStudent->getUserID() . '_cv.pdf" ><input type="button" class="btn btn-secondary" name="showCV" value="Show Student CV"></a>' . '<input type="hidden" id="hiddenPlacementID" name="hiddenPlacementID" value="'  . $placementData->getPlacementID() . '"><input type="submit" class="btn btn-secondary" name="employerMatchingYes" value="Accept ' . $appliedStudent->getUserID() . '">' . '<input type="submit" class="btn btn-secondary" name="employerMatchingNo" value="Reject ' . $appliedStudent->getUserID() . '">' . '</td> </tr>';
                                                 }
                                             }?>
