@@ -324,11 +324,13 @@ class UserDataSet
             $dataSet[] = $row;
         }
 
+        $longSQL="";
         foreach($dataSet as $id) {
-            $sqlQuery = "DELETE FROM Relationship WHERE placement_id ='$id';";
-            $statement = $this->_dbHandle->prepare($sqlQuery); //prepare PDO Statement
-            $statement->execute();
+            $longSQL .= "DELETE FROM Relationship WHERE placement_id ='$id';";
         }
+            $statement = $this->_dbHandle->prepare($longSQL); //prepare PDO Statement
+            $statement->execute();
+
 
         $sqlQuery = "DELETE FROM Placement WHERE employer_id = ?;
                      DELETE FROM Employer WHERE id_employer=?;
