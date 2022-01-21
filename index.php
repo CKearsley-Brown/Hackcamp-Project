@@ -36,14 +36,20 @@ if (isset($_SESSION["login"])) {
         header("Refresh:0");
     }
 
-    // REPLACE RELATIONSHIP_ID !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    if (isset($_POST["employerMatchingYes"])) {
-        $userTableDataSet->employerAcceptPlacement($relationship_id);
+    if ($userTableDataSet->checkIfEmployer($_SESSION['user_id'])) {
+        require_once('Models/PlacementDataSet.php');
+        $placementDataSet = new PlacementDataSet();
+        $view->placementDataSet = $placementDataSet->employerViewAllPlacements($_SESSION['user_id']);
     }
 
-    // REPLACE RELATIONSHIP_ID !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    if (isset($_POST["employerMatchingYes"])) {
+        $studentID = substr($_POST["employerMatchingYes"],7);
+        $userTableDataSet->employerAcceptPlacement($studentID, $_POST["hiddenPlacementID"]);
+    }
+
     if (isset($_POST["employerMatchingNo"])) {
-        $userTableDataSet->employerRejectPlacement($relationship_id);
+        $recipient = substr($_POST["employerMatchingNo"],7);
+        $userTableDataSet->employerRejectPlacement($studentID, $_POST["hiddenPlacementID"]);
     }
 }
 

@@ -221,14 +221,14 @@ class UserDataSet
     }
 
     public function studentAcceptedPlacements($pid) {
-        $sqlQuery = "SELECT user_id FROM Relationship WHERE status=1 AND placement_id=$pid"; //prepare SQL to query the database
+        $sqlQuery = "SELECT * FROM Relationship WHERE status=1 AND placement_id=$pid"; //prepare SQL to query the database
 
         $statement = $this->_dbHandle->prepare($sqlQuery); // prepare a PDO statement
         $statement->execute(); // execute the PDO statement
 
         $dataSet = []; //create dataset to store query data
         while ($row = $statement->fetch()) {
-            $dataSet[] = new UserData($row);
+            $dataSet[] = new RelationshipData($row);
         }
         return $dataSet;
     }

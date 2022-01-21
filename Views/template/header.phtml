@@ -43,12 +43,12 @@
                 if ($userTableDataSet->checkIfEmployer($_SESSION['user_id'])) {
                     echo '<li><a href = "index.php" > Home </a ></li>';
                     echo '<li><a href = "createplacement.php" > Create Placement </a ></li>';
-                    echo '<li><a href = "#" > Edit Profile </a ></li>';
+                    echo '<li><a href = "editprofile.php" > Edit Profile </a ></li>';
                 }
                 elseif ($userTableDataSet->checkIfStudent($_SESSION['user_id']))
                 {
                     echo '<li><a href = "index.php" > Home </a ></li>';
-                    echo '<li><a href = "#" > Edit CV </a ></li>';
+                    echo '<li><a href = "editprofile.php" > Edit Profile </a ></li>';
                 }
             } else {
                 echo '<li id="loginButton"><a href = "index.php" > Login</a ></li>';

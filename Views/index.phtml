@@ -26,7 +26,7 @@ else
     if($userTableDataSet->checkIfStudent($_SESSION['user_id']))
     {
         ?>
-               <h2>Matching</h2>
+               <h2>Matching Student</h2>
 
                 <div class="container">
                     <?php
@@ -72,26 +72,42 @@ else
     else if($userTableDataSet->checkIfEmployer($_SESSION['user_id']))
     {
         ?>
-               <h2>Matching</h2>
+               <h2>Applications</h2>
 
                 <div class="container">
-                    <div class="row">
-                        <div class="col d-flex justify-content-center">
-                            <form method="post" class="form text-primary">
-                                <input type="submit" class="btn btn-secondary" name="employerMatchingNo" value="No">
-                            </form>
-                         </div>
-                        <div class="col-8 d-flex justify-content-center">
-                            <embed src="/CVs/brief.pdf" width="800vw" height="1000vh" />
+                    <?php
+                    if (empty($view->placementDataSet)) {
+                        echo '<p>No placements has been created.</p>';
+                    } else {
+                        foreach ($view->placementDataSet as $placementData) { ?>
+                            <div class="row">
+                                <div class="col-8 justify-content-center">
+                                    <p>Description: <?php echo $placementData->getDescription() ?></p>
+                                    <p>Skills Required: <?php echo $placementData->getSkillsRequired() ?></p>
+                                    <p>Salary: <?php echo $placementData->getSalary() ?></p>
+                                    <p>Location: <?php echo $placementData->getLocation() ?></p>
+                                    <p>Start and End Date: <?php echo $placementData->getStart() ?>  |  <?php echo $placementData->getEnd() ?></p>
+                                    <p>Type: <?php echo $placementData->getType() ?> </p>
+                                    <table class="table table-hover">
+                                        <form method="post" action="" class="form text-primary">
+                                        <tbody>
+                                            <?php
+                                            if (empty($userTableDataSet->studentAcceptedPlacements($placementData->getPlacementID()))) {
+                                                echo '<p>No student has applied yet.</p>';
+                                            } else {
+                                                foreach ($userTableDataSet->studentAcceptedPlacements($placementData->getPlacementID()) as $appliedStudent) {
+                                                    echo '<tr> <td>' . $appliedStudent->getUserID() . '</td> <td>' . '<a href = "CVs/'. $appliedStudent->getUserID() . '_cv.pdf" ><input type="button" class="btn btn-secondary" name="showCV" value="Show Student CV"></a>' . '<input type="hidden" id="hiddenPlacementID" name="hiddenPlacementID" value="'  . $placementData->getPlacementID() . '"><input type="submit" class="btn btn-secondary" name="employerMatchingYes" value="Accept ' . $appliedStudent->getUserID() . '">' . '<input type="submit" class="btn btn-secondary" name="employerMatchingNo" value="Reject ' . $appliedStudent->getUserID() . '">' . '</td> </tr>';
+                                                }
+                                            }?>
+                                        </tbody>
+                                        </form>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col d-flex justify-content-center">
-                            <form method="post" class="form text-primary">
-                                <input type="submit" class="btn btn-secondary" name="employerMatchingYes" value="Yes">
-                            </form>
-                        </div>
-                    </div>
-                </div>
-        <?php
+                    <?php
+                        }
+                    }
     }
 }
 ?>
