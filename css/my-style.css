@@ -76,11 +76,13 @@ label{
     border-top: 5px solid rgb(31, 128, 50);
     border-bottom: 5px solid rgb(31, 128, 50);
     list-style-type: none;
+    padding-top: 2vh;
 }
 
 #menu label{
     color: white;
     margin-top: 2vh;
+    font-weight: bold;
 }
 
 #menu a{
@@ -92,10 +94,6 @@ label{
 #menu a:hover {
     color: rgb(31, 128, 50);
     text-decoration: none;
-}
-
-#loginButton {
-    margin-top: 2vh;
 }
 
 footer {

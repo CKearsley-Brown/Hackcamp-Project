@@ -33,7 +33,14 @@
             if ($_SESSION['user']->getLogStatus()) {
                 echo '
             <form method="post" action="" class="form text-primary">
-                <label>Logged in as ' . $_SESSION["login"] .'</label>';
+                <label style="display: inline">Logged in as ' . $_SESSION["login"] .'</label>';
+                if ($userTableDataSet->checkIfEmployer($_SESSION['user_id'])) {
+                    echo '<label style="display: inline">(Employer)</label>';
+                }
+                elseif ($userTableDataSet->checkIfStudent($_SESSION['user_id']))
+                {
+                    echo '<label style="display: inline">(Student)</label>';
+                }
                 echo '
                 <input type="submit" class="btn btn-danger" name="logoutbutton" value="Logout">
             </form>';
