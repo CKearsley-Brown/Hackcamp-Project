@@ -309,5 +309,37 @@ class UserDataSet
         return $dataSet;
     }
 
+    public function deleteEmployer($uid) {
+
+        $sqlQuery = "SELECT id_placement FROM Placement WHERE employer_id = ?;";
+        $statement = $this->_dbHandle->prepare($sqlQuery); //prepare PDO Statement
+
+        $statement->bindParam(1,$uid);
+
+        $statement->execute();
+
+        $dataSet = []; //create dataset to store query data
+
+        while ($row = $statement->fetch()) {
+            $dataSet[] = $row;
+        }
+
+        foreach($dataSet as $id) {
+            $sqlQuery = "DELETE FROM Relationship WHERE placement_id ='$id';";
+            $statement = $this->_dbHandle->prepare($sqlQuery); //prepare PDO Statement
+            $statement->execute();
+        }
+
+        $sqlQuery = "DELETE FROM Placement WHERE employer_id = ?;
+                     DELETE FROM Employer WHERE id_employer=?;
+                     DELETE FROM Users WHERE user_id=?";
+
+        $statement = $this->_dbHandle->prepare($sqlQuery); //prepare PDO Statement
+
+        $statement->bindParam(1,$uid);
+
+        $statement->execute(); //execute PDO Statement
+    }
+
 
 }
