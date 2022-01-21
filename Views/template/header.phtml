@@ -33,14 +33,7 @@
             if ($_SESSION['user']->getLogStatus()) {
                 echo '
             <form method="post" action="" class="form text-primary">
-                <label>Logged in as ' . $_SESSION["login"] . '</label>';
-                if ($userTableDataSet->checkIfEmployer($_SESSION['user_id'])) {
-                    echo '<label>Logged in as Employer</label>';
-                }
-                elseif ($userTableDataSet->checkIfStudent($_SESSION['user_id']))
-                {
-                    echo '<label>Logged in as Student</label>';
-                }
+                <label>Logged in as ' . $_SESSION["login"] .'</label>';
                 echo '
                 <input type="submit" class="btn btn-danger" name="logoutbutton" value="Logout">
             </form>';
@@ -58,8 +51,8 @@
                     echo '<li><a href = "#" > Edit CV </a ></li>';
                 }
             } else {
-                echo '<li><a href = "index.php" > Login</a ></li>';
-                echo '<li><a href = "register.php" > Register</a ></li>';
+                echo '<li id="loginButton"><a href = "index.php" > Login</a ></li>';
+                echo '<li id="regButton"><a href = "register.php" > Register</a ></li>';
             }
             ?>
         </div>

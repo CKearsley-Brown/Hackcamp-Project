@@ -21,6 +21,10 @@ h1,h2,h3,h4,h5,h6
     color: rgb(15,65,27);
 }
 
+label{
+    color: rgb(31, 128, 50);
+}
+
 #title{
     background-color: black;
     height: 17vh;
@@ -33,6 +37,7 @@ h1,h2,h3,h4,h5,h6
     float: left;
     vertical-align: middle;
     height: 90%;
+    min-height: 60px;
 }
 
 #title h1 {
@@ -46,8 +51,23 @@ h1,h2,h3,h4,h5,h6
 #content {
     background-color: white;
     padding: 2%;
+    min-height: 70vh;
     border-top: 5px solid rgb(31, 128, 50);
     border-bottom: 5px solid rgb(31, 128, 50);
+}
+
+@media screen and (max-width: 575px){
+    #content {
+        border-top: none;
+    }
+
+    #menu #loginButton{
+        margin-top: 2vh;
+    }
+
+    #menu #regButton{
+        margin-bottom: 2vh;
+    }
 }
 
 #menu {
@@ -55,16 +75,27 @@ h1,h2,h3,h4,h5,h6
     color: white;
     border-top: 5px solid rgb(31, 128, 50);
     border-bottom: 5px solid rgb(31, 128, 50);
+    list-style-type: none;
 }
 
-#menu label,a {
+#menu label{
     color: white;
     margin-top: 2vh;
+}
+
+#menu a{
+    color: white;
+    margin-top: 2vh;
+    font-weight: bold;
 }
 
 #menu a:hover {
     color: rgb(31, 128, 50);
     text-decoration: none;
+}
+
+#loginButton {
+    margin-top: 2vh;
 }
 
 footer {
