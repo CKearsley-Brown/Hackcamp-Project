@@ -122,6 +122,17 @@ class PlacementDataSet {
         }
         return $dataSet;
     }
+
+    public function deleteRelationships($pID) {
+        $sqlQuery = "DELETE FROM Relationship WHERE placement_id=?";
+
+        $statement = $this->_dbHandle->prepare($sqlQuery); //prepare PDO Statement
+
+        $statement->bindParam(1,$pID);
+
+        return $statement->execute(); //execute PDO Statement
+
+    }
 }
 
 
