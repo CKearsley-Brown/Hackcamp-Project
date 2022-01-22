@@ -77,8 +77,8 @@ class PlacementDataSet {
     }
 
     public function deletePlacement($pid) {
-        $sqlQuery = "DELETE FROM Relationship WHERE placement_id=1;
-                     DELETE FROM Placement WHERE id_placement=1";
+        $sqlQuery = "DELETE FROM Relationship WHERE placement_id=?;
+                     DELETE FROM Placement WHERE id_placement=?";
 
         $statement = $this->_dbHandle->prepare($sqlQuery); //prepare PDO Statement
 
