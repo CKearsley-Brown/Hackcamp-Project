@@ -247,7 +247,7 @@ class UserDataSet
     }
 
     public function employerAcceptedPlacements($pid) {
-        $sqlQuery = "SELECT * FROM Relationship WHERE status=2 AND user_id=$pid"; //prepare SQL to query the database
+        $sqlQuery = "SELECT * FROM Relationship WHERE status=2 AND placement_id=$pid"; //prepare SQL to query the database
 
         $statement = $this->_dbHandle->prepare($sqlQuery); // prepare a PDO statement
         $statement->execute(); // execute the PDO statement
