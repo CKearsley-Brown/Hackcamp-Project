@@ -2,7 +2,7 @@
 <project version="4">
   <component name="PhpUnit">
     <phpunit_settings>
-      <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/../../../../xampp/php/ext/php_xdebug.dll" phpunit_phar_path="" />
+      <PhpUnitSettings load_method="PHPUNIT_PHAR" configuration_file_path="$PROJECT_DIR$/.idea/php.xml" custom_loader_path="$PROJECT_DIR$/../../../../xampp/php/ext/php_xdebug.dll" phpunit_phar_path="$PROJECT_DIR$/phpunit.phar" />
     </phpunit_settings>
   </component>
 </project>
