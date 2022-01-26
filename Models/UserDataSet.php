@@ -283,23 +283,23 @@ class UserDataSet
 
         $dataSet = []; //create dataset to store query data
         while ($row = $statement->fetch()) {
+            var_dump($row);
             $dataSet[] = new StudentData($row);
         }
         return $dataSet;
     }
 
 
-    public function studentEditProfile($_name, $_email, $_phone_number, $_postal_address, $_cv, $uid) {
-        $sqlQuery = "UPDATE Users SET name=?, email=?, phone_number=?, postal_address=? WHERE user_id=$uid;
+    public function studentEditProfile($_name, $_phone_number, $_postal_address, $_cv, $uid) {
+        $sqlQuery = "UPDATE Users SET name=?, phone_number=?, postal_address=? WHERE user_id=$uid;
                      UPDATE Student SET cv=? WHERE id_student=$uid";
 
         $statement = $this->_dbHandle->prepare($sqlQuery); // prepare a PDO statement
 
         $statement->bindParam(1, $_name);
-        $statement->bindParam(2, $_email);
-        $statement->bindParam(3, $_phone_number);
-        $statement->bindParam(4, $_postal_address);
-        $statement->bindParam(5, $_cv);
+        $statement->bindParam(2, $_phone_number);
+        $statement->bindParam(3, $_postal_address);
+        $statement->bindParam(4, $_cv);
 
         return $statement->execute(); //execute PDO
 
@@ -323,12 +323,13 @@ class UserDataSet
         return $dataSet;
     }
 
-    public function deleteEmployer($uid) {
+    public function deleteEmployer($uid)
+    {
 
         $sqlQuery = "SELECT id_placement FROM Placement WHERE employer_id = ?;";
         $statement = $this->_dbHandle->prepare($sqlQuery); //prepare PDO Statement
 
-        $statement->bindParam(1,$uid);
+        $statement->bindParam(1, $uid);
 
         $statement->execute();
 
@@ -338,13 +339,14 @@ class UserDataSet
             $dataSet[] = $row;
         }
 
-        $longSQL="";
-        foreach($dataSet as $id) {
-            $longSQL .= "DELETE FROM Relationship WHERE placement_id ='$id';";
-        }
+        if (!empty($dataSet)) {
+            $longSQL = "";
+            foreach ($dataSet as $id) {
+                $longSQL .= "DELETE FROM Relationship WHERE placement_id ='$id[0]';";
+            }
             $statement = $this->_dbHandle->prepare($longSQL); //prepare PDO Statement
             $statement->execute();
-
+        }
 
         $sqlQuery = "DELETE FROM Placement WHERE employer_id = ?;
                      DELETE FROM Employer WHERE id_employer=?;
@@ -353,26 +355,24 @@ class UserDataSet
         $statement = $this->_dbHandle->prepare($sqlQuery); //prepare PDO Statement
 
         $statement->bindParam(1,$uid);
+        $statement->bindParam(2,$uid);
+        $statement->bindParam(3,$uid);
 
         $statement->execute(); //execute PDO Statement
     }
 
 
-    public function employerEditProfile($_name, $_email, $_phone_number, $_postal_address, $_image, $_companyName, $uid) {
-        $sqlQuery = "UPDATE Users SET name=?, email=?, phone_number=?, postal_address=? WHERE user_id=$uid;
-                     UPDATE Employer SET image=?, company_name=? WHERE id_employer=$uid";
+    public function employerEditProfile($_name, $_phone_number, $_postal_address, $_image, $uid) {
+        $sqlQuery = "UPDATE Users SET name=?, phone_number=?, postal_address=? WHERE user_id=$uid;
+                     UPDATE Employer SET image=? WHERE id_employer=$uid";
 
         $statement = $this->_dbHandle->prepare($sqlQuery); // prepare a PDO statement
 
         $statement->bindParam(1, $_name);
-        $statement->bindParam(2, $_email);
-        $statement->bindParam(3, $_phone_number);
-        $statement->bindParam(4, $_postal_address);
-        $statement->bindParam(5, $_image);
-        $statement->bindParam(6, $_companyName);
+        $statement->bindParam(2, $_phone_number);
+        $statement->bindParam(3, $_postal_address);
+        $statement->bindParam(4, $_image);
 
         return $statement->execute(); //execute PDO
     }
-
-
 }

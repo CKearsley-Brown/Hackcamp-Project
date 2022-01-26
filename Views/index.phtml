@@ -50,6 +50,27 @@ else
                             <p>Start and End Date: <?php echo $view->placementDataSet[0]->getStart() ?>   |  <?php echo  $view->placementDataSet[0]->getEnd() ?></p>
                             <br>
                             <p>Type: <?php echo $view->placementDataSet[0]->getType() ?> </p>
+                            <br>
+                            <form method="post" class="form text-primary">
+                                <div class="form-group">
+                                    <label for="filterType">Filter by Type: </label>
+                                    <select class="form-control" name="filterType">
+                                        <option value="noFilter">No Filter</option>
+                                        <option value="agriculture">Agriculture, Food, and Natural Resources</option>
+                                        <option value="architecture">Architecture and Construction</option>
+                                        <option value="arts">Arts, Audio/Video Technology, and Communication</option>
+                                        <option value="business">Business and Finance</option>
+                                        <option value="education">Education and Training</option>
+                                        <option value="government">Government and Public Administration</option>
+                                        <option value="health">Health Science</option>
+                                        <option value="it">Information Technology</option>
+                                        <option value="law">Law, Public Safety, Corrections, and Security</option>
+                                        <option value="marketing">Marketing</option>
+                                        <option value="science">Science, Technology, Engineering, and Math</option>
+                                    </select>
+                                </div>
+                                <input type="submit" class="btn btn-secondary" name="filterButton" value="Apply Filter">
+                            </form>
                         </div>
                         <div class="col d-flex justify-content-center">
                             <form method="post" class="form text-primary">
@@ -63,6 +84,26 @@ else
                     {
                     ?>
                     <p>Currently there are no placements available. Please check back again later.</p>
+                    <form method="post" class="form text-primary">
+                        <div class="form-group">
+                            <label for="filterType">Filter by Type: </label>
+                            <select class="form-control" name="filterType">
+                                <option value="noFilter">No Filter</option>
+                                <option value="agriculture">Agriculture, Food, and Natural Resources</option>
+                                <option value="architecture">Architecture and Construction</option>
+                                <option value="arts">Arts, Audio/Video Technology, and Communication</option>
+                                <option value="business">Business and Finance</option>
+                                <option value="education">Education and Training</option>
+                                <option value="government">Government and Public Administration</option>
+                                <option value="health">Health Science</option>
+                                <option value="it">Information Technology</option>
+                                <option value="law">Law, Public Safety, Corrections, and Security</option>
+                                <option value="marketing">Marketing</option>
+                                <option value="science">Science, Technology, Engineering, and Math</option>
+                            </select>
+                        </div>
+                        <input type="submit" class="btn btn-secondary" name="filterButton" value="Apply Filter">
+                    </form>
                     <?php
                     }
                     ?>

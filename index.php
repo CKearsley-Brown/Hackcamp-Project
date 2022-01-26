@@ -4,24 +4,27 @@ require_once('controller.php');
 $view = new stdClass();
 $view->pageTitle = 'Index';
 
-unset($_SESSION["loginError"]);
-
-// Collect username and password for checking with password_verify
-if (isset($_POST["loginbutton"]))
-{
-    if (!$_SESSION['user']->AttemptLoginUser($_POST["email"],$_POST["password"]))
-    {
-        $_SESSION["loginError"] = "Incorrect Email or Password.";
-    }
-}
-
 // if logged in
 if (isset($_SESSION["login"])) {
     // If logged in as student, get next placement if any
     if ($userTableDataSet->checkIfStudent($_SESSION['user_id'])) {
         require_once('Models/PlacementDataSet.php');
         $placementDataSet = new PlacementDataSet();
-        $view->placementDataSet = $placementDataSet->noFilter($_SESSION['user_id']);
+        if (!isset($_SESSION["filter"])) {
+            $view->placementDataSet = $placementDataSet->noFilter($_SESSION['user_id']);
+        } else {
+            $view->placementDataSet = $placementDataSet->filterByType($_SESSION["filter"], $_SESSION['user_id']);
+        }
+    }
+
+    // Filter button is pressed
+    if (isset($_POST["filterButton"])) {
+        if ($_POST["filterType"] == "noFilter") {
+            unset($_SESSION["filter"]);
+        } else {
+            $_SESSION["filter"] = $_POST["filterType"];
+        }
+        header("Refresh:0");
     }
 
     // Student Accepts Placement
