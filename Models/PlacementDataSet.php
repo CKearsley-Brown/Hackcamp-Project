@@ -123,6 +123,23 @@ class PlacementDataSet {
         return $dataSet;
     }
 
+    public function filterBySkills($skills,$uid) {
+        $sqlQuery = "SELECT * FROM Placement WHERE skills_required = ? AND Placement.id_placement NOT IN(SELECT placement_id FROM Relationship WHERE user_id = ?) LIMIT 1";
+
+        $statement = $this->_dbHandle->prepare($sqlQuery); // prepare a PDO statement
+
+        $statement->bindParam(1,$skills);
+        $statement->bindParam(2,$uid);
+
+        $statement->execute(); // execute the PDO statement
+
+        $dataSet = [];
+        while ($row = $statement->fetch()) {
+            $dataSet[] = new PlacementData($row);
+        }
+        return $dataSet;
+    }
+
     public function deleteRelationships($pID) {
         $sqlQuery = "DELETE FROM Relationship WHERE placement_id=?";
 
