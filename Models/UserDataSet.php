@@ -66,7 +66,8 @@ class UserDataSet
     public function checkUniqueCName($CName)
     {
         //checks company name is unique when registering for an account
-        $sqlPKeyCheck = "SELECT * From Employer WHERE company_name = ?"; // checks that the primary key is unique
+        $sqlPKeyCheck = "SELECT * From Emplo
+    yer WHERE company_name = ?"; // checks that the primary key is unique
         $checkStatement = $this->_dbHandle->prepare($sqlPKeyCheck); // prepare a PDO statement
 
         $checkStatement->bindParam(1,$CName);
