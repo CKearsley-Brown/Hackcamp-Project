@@ -284,7 +284,6 @@ class UserDataSet
 
         $dataSet = []; //create dataset to store query data
         while ($row = $statement->fetch()) {
-            var_dump($row);
             $dataSet[] = new StudentData($row);
         }
         return $dataSet;

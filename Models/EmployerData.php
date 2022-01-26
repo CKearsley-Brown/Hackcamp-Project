@@ -24,6 +24,21 @@ class EmployerData extends UserData {
         return $this->_employerID;
     }
 
+    public function getContactName()
+    {
+        return $this->_name;
+    }
+
+    public function getPhoneNumber()
+    {
+        return $this->_phoneNumber;
+    }
+
+    public function getPostalAddress()
+    {
+        return $this->_postalAddress;
+    }
+
     /**
      * @return mixed
      */

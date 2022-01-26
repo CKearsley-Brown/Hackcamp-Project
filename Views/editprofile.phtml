@@ -1,21 +1,20 @@
 <?php require('template/header.phtml');
 if($userTableDataSet->checkIfStudent($_SESSION['user_id'])) {
     $studentInfo = $userTableDataSet->studentReturnProfile($_SESSION['user_id']);
-    var_dump($studentInfo);
 ?>
 <h2>Student</h2>
     <form method="post" action="" class="form text-primary" enctype="multipart/form-data">
         <div class="form-group">
             <label for="studentName">Name *</label>
-            <input type="text" class="form-control" placeholder="Name" name="studentName" required>
+            <input type="text" class="form-control" placeholder="Name" name="studentName" value="<?php echo $studentInfo[0]->getName(); ?>" required>
         </div>
         <div class="form-group">
             <label for="studentPhoneNumber">Phone Number *</label>
-            <input type="text" class="form-control" placeholder="Phone Number" name="studentPhoneNumber" required>
+            <input type="text" class="form-control" placeholder="Phone Number" name="studentPhoneNumber" value="<?php echo $studentInfo[0]->getPhoneNumber(); ?>" required>
         </div>
         <div class="form-group">
             <label for="studentPostalAddress">Postal Address *</label>
-            <input type="text" class="form-control" placeholder="Postal Address" name="studentPostalAddress" required>
+            <input type="text" class="form-control" placeholder="Postal Address" name="studentPostalAddress" value="<?php echo $studentInfo[0]->getPostalAddress(); ?>" required>
         </div>
         <div class="form-group">
             <label for="cv">CV Upload *</label>
@@ -26,20 +25,21 @@ if($userTableDataSet->checkIfStudent($_SESSION['user_id'])) {
     </form>
 <?php
 } elseif ($userTableDataSet->checkIfEmployer($_SESSION['user_id'])) {
+    $employerInfo = $userTableDataSet->employerReturnProfile($_SESSION['user_id']);
 ?>
 <h2>Employer</h2>
     <form method="post" action="" class="form text-primary" enctype="multipart/form-data">
         <div class="form-group">
             <label for="employerContactName">Contact Name *</label>
-            <input type="text" class="form-control" placeholder="Name" name="employerContactName">
+            <input type="text" class="form-control" placeholder="Name" name="employerContactName" value="<?php echo $employerInfo[0]->getContactName() ?>" required>
         </div>
         <div class="form-group">
             <label for="employerPhoneNumber">Phone Number *</label>
-            <input type="text" class="form-control" placeholder="Phone Number" name="employerPhoneNumber">
+            <input type="text" class="form-control" placeholder="Phone Number" name="employerPhoneNumber" value="<?php echo $employerInfo[0]->getPhoneNumber() ?>" required>
         </div>
         <div class="form-group">
             <label for="employerPostalAddress">Postal Address *</label>
-            <input type="text" class="form-control" placeholder="Postal Address" name="employerPostalAddress">
+            <input type="text" class="form-control" placeholder="Postal Address" name="employerPostalAddress" value="<?php echo $employerInfo[0]->getPostalAddress() ?>" required>
         </div>
         <div class="form-group">
             <label for="img">Image Upload *</label>

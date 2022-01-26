@@ -49,7 +49,7 @@ if ($userTableDataSet->checkIfEmployer($_SESSION['user_id'])) {
             $userTableDataSet->employerEditProfile($_POST['employerContactName'], $_POST['employerPhoneNumber'], $_POST['employerPostalAddress'], $target_file, $userID);
         }
         else {
-            $_SESSION["registerError"] = "Please input an image.";
+            $_SESSION["editProfileError"] = "Please input an image.";
         }
     }
 }
@@ -88,7 +88,7 @@ if ($userTableDataSet->checkIfStudent($_SESSION['user_id'])) {
                 $upload = 1; // sets upload to yes
             }
             else {
-                $_SESSION["registerError"] = "File is not an CV.";
+                $_SESSION["editProfileError"] = "File is not an CV.";
                 $upload = 0;
             }
         }
@@ -96,7 +96,7 @@ if ($userTableDataSet->checkIfStudent($_SESSION['user_id'])) {
             $userTableDataSet->studentEditProfile($_POST['studentName'], $_POST['studentPhoneNumber'], $_POST['studentPostalAddress'], $target_file, $userID);
         }
         else {
-            $_SESSION["registerError"] = "Please input a CV.";
+            $_SESSION["editProfileError"] = "Please input a CV.";
         }
 
     }
