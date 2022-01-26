@@ -273,7 +273,7 @@ class UserDataSet
     }
 
     public function studentReturnProfile($uid) {
-        $sqlQuery = "SELECT Users.user_id,Users.name,Users.email,Users.phone_number,Users.postal_address,Users.password,Student.cv 
+        $sqlQuery = "SELECT Users.user_id,Users.name,Users.email,Users.phone_number,Users.postal_address,Users.password,Student.cv,Student.id_student
                      FROM Users
                      INNER JOIN Student ON Users.user_id=Student.id_student
                      WHERE Users.user_id=?"; //prepare SQL to query the database
@@ -308,7 +308,7 @@ class UserDataSet
 
 
     public function employerReturnProfile($uid) {
-        $sqlQuery = "SELECT Users.user_id,Users.name,Users.email,Users.phone_number,Users.postal_address,Users.password,Employer.image,Employer.company_name 
+        $sqlQuery = "SELECT Users.user_id,Users.name,Users.email,Users.phone_number,Users.postal_address,Users.password,Employer.image,Employer.company_name,Employer.id_employer
                      FROM Users 
                      INNER JOIN Employer ON Users.user_id=Employer.id_Employer 
                      WHERE Users.user_id=?"; //prepare SQL to query the database
