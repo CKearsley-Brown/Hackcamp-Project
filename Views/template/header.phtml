@@ -50,6 +50,7 @@
                 if ($userTableDataSet->checkIfEmployer($_SESSION['user_id'])) {
                     echo '<li><a href = "index.php" > Home </a ></li>';
                     echo '<li><a href = "createplacement.php" > Create Placement </a ></li>';
+                    echo '<li><a href = "editplacement.php" > Edit Placement </a></li>';
                     echo '<li><a href = "editprofile.php" > Edit Profile </a ></li>';
                 }
                 elseif ($userTableDataSet->checkIfStudent($_SESSION['user_id']))
