@@ -4,6 +4,16 @@
 
 if (!isset($_SESSION["login"])) {
     echo ' 
+            <p class="benefits">
+                Placements are work experience that is part of a students degree. It is an excellent opportunity to apply the knowledge
+                they have accumulated in their academic years within a working environment. They come with a range of benefits including:
+            </p>
+            <ul class="benefits">
+                <li>Incredibly valuable work experience to add in a student\'s CV</li>
+                <li>Greater knowledge of the industry</li>
+                <li>A chance to further develop skills</li>
+                <li>Provides greater experience in applying for a job</li>
+            </ul>
             <form method="post" action="" class="form text-primary">
                 <div class="form-group">
                     <label for="email">Email</label>
@@ -33,12 +43,12 @@ else
                     if (!empty($view->placementDataSet)) {
                     ?>
                     <div class="row">
-                        <div class="col d-flex justify-content-center">
+                        <div class="col-2 d-flex justify-content-center">
                             <form method="post" class="form text-primary">
-                                <input type="submit" class="btn btn-secondary" name="studentMatchingNo" value="No">
+                                <input id="no" type="submit" class="btn btn-danger" name="studentMatchingNo" value="No">
                             </form>
                          </div>
-                        <div class="col-8 justify-content-center" style="height: 69vh">
+                        <div id="placement" class="col-8 justify-content-center">
                             <p>Description: <?php echo $view->placementDataSet[0]->getDescription() ?></p>
                             <br>
                             <p>Skills Required: <?php echo $view->placementDataSet[0]->getSkillsRequired() ?></p>
@@ -69,12 +79,14 @@ else
                                         <option value="science">Science, Technology, Engineering, and Math</option>
                                     </select>
                                 </div>
-                                <input type="submit" class="btn btn-secondary" name="filterButton" value="Apply Filter">
+                                <div class="col d-flex justify-content-center">
+                                    <input type="submit" class="btn btn-secondary" name="filterButton" value="Apply Filter">
+                                </div>
                             </form>
                         </div>
-                        <div class="col d-flex justify-content-center">
+                        <div class="col-2 d-flex justify-content-center">
                             <form method="post" class="form text-primary">
-                                <input type="submit" class="btn btn-secondary" name="studentMatchingYes" value="Yes">
+                                <input id="yes" type="submit" class="btn btn-success" name="studentMatchingYes" value="Yes">
                             </form>
                         </div>
                     </div>
@@ -122,7 +134,7 @@ else
                     } else {
                         foreach ($view->placementDataSet as $placementData) { ?>
                             <div class="row">
-                                <div class="col-8 justify-content-center">
+                                <div id="application" class="col-8 justify-content-center">
                                     <p>Description: <?php echo $placementData->getDescription() ?></p>
                                     <p>Skills Required: <?php echo $placementData->getSkillsRequired() ?></p>
                                     <p>Salary: <?php echo $placementData->getSalary() ?></p>
@@ -137,7 +149,7 @@ else
                                                 echo '<p>No student has applied yet.</p>';
                                             } else {
                                                 foreach ($userTableDataSet->studentAppliedPlacements($placementData->getPlacementID()) as $appliedStudent) {
-                                                    echo '<tr> <td>' . $appliedStudent->getUserID() . '</td> <td>' . '<a href = "CVs/'. $appliedStudent->getUserID() . '_cv.pdf" ><input type="button" class="btn btn-secondary" name="showCV" value="Show Student CV"></a>' . '<input type="hidden" id="hiddenPlacementID" name="hiddenPlacementID" value="'  . $placementData->getPlacementID() . '"><input type="submit" class="btn btn-secondary" name="employerMatchingYes" value="Accept ' . $appliedStudent->getUserID() . '">' . '<input type="submit" class="btn btn-secondary" name="employerMatchingNo" value="Reject ' . $appliedStudent->getUserID() . '">' . '</td> </tr>';
+                                                    echo '<tr> <td>' . $appliedStudent->getUserID() . '</td> <td>' . '<a href = "CVs/'. $appliedStudent->getUserID() . '_cv.pdf" ><input id="buttons" type="button" class="btn btn-secondary" name="showCV" value="Show Student CV"></a>' . '<input id="buttons" type="hidden" id="hiddenPlacementID" name="hiddenPlacementID" value="'  . $placementData->getPlacementID() . '"><input id="buttons" type="submit" class="btn btn-success" name="employerMatchingYes" value="Accept ' . $appliedStudent->getUserID() . '">' . '<input id="buttons" type="submit" class="btn btn-danger" name="employerMatchingNo" value="Reject ' . $appliedStudent->getUserID() . '">' . '</td> </tr>';
                                                 }
                                             }?>
                                         </tbody>

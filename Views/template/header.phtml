@@ -33,7 +33,7 @@
             if ($_SESSION['user']->getLogStatus()) {
                 echo '
             <form method="post" action="" class="form text-primary">
-                <label style="display: inline">Logged in as ' . $_SESSION["login"] .'</label>';
+                <label id="status">Logged in as ' . $_SESSION["login"] .'</label>';
                 if ($userTableDataSet->checkIfEmployer($_SESSION['user_id'])) {
                     echo '<label style="display: inline">(Employer)</label>';
                 }
@@ -42,22 +42,23 @@
                     echo '<label style="display: inline">(Student)</label>';
                 }
                 echo '
-                <input type="submit" class="btn btn-danger" name="logoutbutton" value="Logout">
-            </form>';
+                <input id="logOut" type="submit" class="btn btn-danger" name="logoutbutton" value="Logout">
+            </form>
+            ';
             }
 
             if ($_SESSION['user']->getLogStatus()) {
                 if ($userTableDataSet->checkIfEmployer($_SESSION['user_id'])) {
-                    echo '<li><a href = "index.php" > Home </a ></li>';
-                    echo '<li><a href = "createplacement.php" > Create Placement </a ></li>';
-                    echo '<li><a href = "editplacement.php" > Edit Placement </a></li>';
-                    echo '<li><a href = "editprofile.php" > Edit Profile </a ></li>';
+                    echo '<li class="pages"><a href = "index.php" > Home </a ></li>';
+                    echo '<li class="pages"><a href = "createplacement.php" > Create Placement </a ></li>';
+                    echo '<li class="pages"><a href = "editplacement.php" > Edit Placement </a></li>';
+                    echo '<li class="pages"><a href = "editprofile.php" > Edit Profile </a ></li>';
                 }
                 elseif ($userTableDataSet->checkIfStudent($_SESSION['user_id']))
                 {
-                    echo '<li><a href = "index.php" > Home </a ></li>';
-                    echo '<li><a href = "editprofile.php" > Edit Profile </a ></li>';
-                    echo '<li><a href = "viewacceptedplacements.php" > View Accepted Placements </a ></li>';
+                    echo '<li class="pages"><a href = "index.php" > Home </a ></li>';
+                    echo '<li class="pages"><a href = "editprofile.php" > Edit Profile </a ></li>';
+                    echo '<li class="pages"><a href = "viewacceptedplacements.php" > View Accepted Placements </a ></li>';
                 }
             } else {
                 echo '<li id="loginButton"><a href = "index.php" > Login</a ></li>';

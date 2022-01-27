@@ -111,3 +111,55 @@ footer img {
     margin-right: 10px;
     border:none;
 }
+
+#status {
+    margin-bottom: 0px;
+    display: inline;
+}
+
+@media screen and (min-width: 575px){
+    #status{
+        display: block;
+    }
+}
+
+#logOut{
+    display: block;
+    margin: 20px auto;
+}
+
+.pages{
+    text-align: center;
+}
+
+.benefits {
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#yes{
+    margin-top: 30vh;
+    border-radius: 50%;
+}
+
+#no{
+    margin-top: 30vh;
+    border-radius: 50%;
+}
+
+#placement{
+    height: 69vh;
+    border: solid 2px black;
+    padding: 2em;
+}
+
+#application{
+    border: solid 2px black;
+    padding: 2em;
+}
+
+#buttons{
+    display: inline-block;
+    margin-right: 1em;
+}
