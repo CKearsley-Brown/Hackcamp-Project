@@ -6,7 +6,7 @@
 if($userTableDataSet->checkIfStudent($_SESSION['user_id']))
 {
 ?>
-    <div class="container">
+    <div id="accepted" class="container">
     <?php
     if (empty($userTableDataSet->studentAcceptedPlacements($_SESSION['user_id']))) {
         echo '<p>No placements has been created.</p>';

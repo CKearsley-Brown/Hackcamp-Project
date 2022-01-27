@@ -163,3 +163,8 @@ footer img {
     display: inline-block;
     margin-right: 1em;
 }
+
+#accepted{
+    border: solid 2px black;
+    padding: 2em;
+}
