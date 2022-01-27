@@ -27,10 +27,12 @@ if($userTableDataSet->checkIfStudent($_SESSION['user_id']))
                     <p>Type: <?php echo $placementData->getType() ?> </p>
                 </div>
             </div>
-    </div>
             <?php
         }
     }
+    ?>
+    </div>
+<?php
 } else {
     echo "Please login to a student account to see this page";
 }
